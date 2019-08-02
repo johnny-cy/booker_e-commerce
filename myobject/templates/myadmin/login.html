@@ -1,0 +1,22 @@
+{% extends 'myadmin/base.html' %}
+
+{% block main %}
+		<div id="login-page" class="container">
+			<h1>>商城后台管理登录</h1>
+			<form id="login-form" class="well" action="{% url 'myadmin_dologin' %}" method="POST">
+				{% csrf_token %}
+				<input type="text" name="username"class="span2" placeholder="username" /><br />
+				<input type="password" name="password" class="span2" placeholder="Password" /><br />
+				<label class="checkbox"> <input type="checkbox" /> Remember me </label>
+
+				<!-- 驗證碼snippets -->
+				驗證碼:
+				<input type='text' name='code' class='span1' style='width:30;'>
+				<img src="{% url 'myadmin_verify' %}" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random()">
+				<!-- 驗證碼snippets -->
+				<button type="submit" class="btn btn-primary">Sign in</button>
+				<button type="submit" class="btn">Forgot Password</button>
+			</form>	
+		<span style="color:red">{{ info }}</span>
+		</div>
+{% endblock %}
