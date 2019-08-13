@@ -6,17 +6,17 @@
     </h4>
 
     <form class="form-inline" action="{% url 'myadmin_goods_index' 1 %}" method="get">
-        <label>关键字：</label>
+        <label>關鍵字：</label>
         <input type="text" name="keyword" value="{{request.GET.keyword}}" class="input-small" placeholder="商品名称">
 
-        <label> &nbsp; 类别：</label>
+        <label> &nbsp; 類別：</label>
         <select name="typeid" class="span2">
             <option value="0">全部</option>
             {% for vo in typelist %}
                 <option value="{{ vo.id }}" {% if typeid == vo.id %}selected{% endif %}>{{vo.pname}}|--{{ vo.name }}</option>
             {% endfor %}
         </select>
-        <label> &nbsp; 状态：</label>
+        <label> &nbsp; 狀態：</label>
         <select name="state" class="span1">
             <option value="">全部</option>
             <option value="1" {% if request.GET.state == '1' %}selected{% endif %}>新商品</option>
@@ -31,12 +31,12 @@
         <thead>
             <tr>
                 <th>id号</th>
-                <th>商品名称</th>
-                <th>商品类别</th>
-                <th>图片</th>
-                <th>单价</th>
-                <th>点击量</th>
-                <th>状态</th>
+                <th>商品名稱</th>
+                <th>商品類別</th>
+                <th>圖片</th>
+                <th>單價</th>
+                <th>點擊量</th>
+                <th>狀態</th>
                 <th>操作</th>
             </tr>
         </thead>

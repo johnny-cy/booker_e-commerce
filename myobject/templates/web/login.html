@@ -1,4 +1,4 @@
-{% load static from staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -6,26 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title> Flyme 账号 - 登录</title>
-   <meta name="description" content="欢迎登录和注册 Flyme 账号，您可以体验手机云服务功能，包括：在线下载应用，同步手机数据和查找手机等，让您的手机管理更加智能。" />
-  <meta name="keywords" content="魅族  meizu 登录flyme 云服务  查找手机  充值账号  MX M9 MX2" />    <link href="{% static 'web/img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
-    <link href="{% static 'web/img/favicon.ico' %}" rel="icon" type="image/x-icon">
+    <title> 帳號-註冊/登入</title>
     <!-- Bootstrap -->
     <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'web/js/jquery-1.12.4.min.js' %}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
-    <!-- 兼任ie9以下 -->
-    <!--[if lt IE 9]>
-          <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-          <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
     <!-- 自定义 -->
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/global.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/register.css' %}">
     <script type="text/javascript" src="{% static 'web/js/rem.js' %}"></script>
-    <script type="text/javascript" src="{% static 'web/js/topNav.js' %}"></script>
+    <script type="text/javascript" src="{% static 'web/js/topNav2.js' %}"></script>
 
 </head>
 <body>
@@ -34,8 +24,8 @@
     <nav class="navbar navbar-default header ">
       <div class="container clearfix">
           <div class="layout-header-logo navbar-left">
-              <a href="{% url 'index' %}" class="layout-header-logo-link" alt="魅族科技">
-                <img src="{% static 'web/img/logo.png' %}">
+              <a href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
+                  <H3>BOOKER</H3>
               </a>
           </div>      
       </div>
@@ -45,12 +35,12 @@
   <!-- 主内容区域 -->
   <div id="content" class="content">  
     <div class="container-fluid"> 
-    <div class="banner-box hidden-xs hidden-sm">
+    <div class="hidden-xs hidden-sm">
       <div class="container">
         <form id="mainForm" name="mainForm" action="{% url 'dologin' %}" method="post" class="main-form">
           {% csrf_token %}
           <div class="tab-title">
-            <a class="linkAGray" id="toAccountLogin" href="javascript:void(0);">账号登录</a>
+            <a class="linkAGray" id="toAccountLogin" href="javascript:void(0);">帳號登入</a>
           </div><br/>
           {% if info %}
           <div class="tip-box">
@@ -63,22 +53,22 @@
           {% endif %}
           <div class="normalInput cycode-box fieldInput" id="cycode-box">
             <div class="cycode-selectbox">
-              <input class="ipt-account inp-focus" name="username" id="account" maxlength="50" placeholder="登录账号" autocomplete="off">
+              <input class="ipt-account inp-focus" name="username" id="account" maxlength="50" placeholder="登入帳號" autocomplete="off">
             </div>
           </div>
           <div class="normalInput fieldInput passwd-box">
-            <input class="inp-focus" name="password" id="password" maxlength="16"  autocomplete="off" placeholder="登录密码" type="password"/>
+            <input class="inp-focus" name="password" id="password" maxlength="16"  autocomplete="off" placeholder="登入密碼" type="password"/>
            </div>
           <div class="normalInput fieldInput passwd-box">
-            <input class="inp-focus" name="code" style="width:100px;" maxlength="16" placeholder="验证码" autocomplete="off" type="text" />
+            <input class="inp-focus" name="code" style="width:100px;" maxlength="16" placeholder="驗證碼" autocomplete="off" type="text" />
             <img src="{% url 'myadmin_verify' %}?id=1" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random()"/>
            </div>
 
-           <a id="register" href="javascript:document.mainForm.submit();" class="fullBtnBlue">登录</a>
+           <a id="register" href="javascript:document.mainForm.submit();" class="fullBtnBlue">登入</a>
           <div class="transferField">
-            <a class="go2forgetpwd linkABlue rememberFieldForA" href="#">忘记密码?</a>
-            <a class="go2register linkABlue" href="{% url 'register' %}" id="toRegister">注册</a>
-            <span>测试号:zhangsan 密码:123</span>
+            <a class="go2forgetpwd linkABlue rememberFieldForA" href="#">忘記密碼？</a>
+            <a class="go2register linkABlue" href="{% url 'register' %}" id="toRegister">註冊</a>
+            <span>測試帳號:johnny 密碼:12345</span>
           </div>
         </form>
 
@@ -90,51 +80,105 @@
   </div>
   <!-- 主内容区域  E-->
 
-  <!-- 底部区域 -->
-  <div id="flymeFooter " class="footerWrap hidden-xs hidden-sm">
-    <div class="container">
-      <div class="footer-layer1">
-        <div class="footer-innerLink">
-          <a href="#" target="_blank" title="关于魅族">关于魅族</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="工作机会">工作机会</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="联系我们">联系我们</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="法律声明">法律声明</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-
-          <div href="javascript:void(0);" id="globalName" class="footer-language" title="简体中文">
-            简体中文&nbsp;&nbsp;&nbsp;
-            <div id="globalContainer" class="footer-language_menu">
-              <a href="#" id="i18n-link" title="English" class="ClobalItem">English</a>
-            </div>
+   <!-- 底部区域 -->
+   <footer class="layout-footer  hidden-xs hidden-sm">
+      <div class="container">
+          <div class="layout-footer-top clearfix">
+              <ul class="layout-footer-services clearfix">
+                  <li class="layout-footer-services-item">
+                    
+                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-sd-video"></i></span>
+                      <span class="layout-footer-services-text">郵政包郵</span>
+                    
+                  </li>
+                  <li class="layout-footer-services-item">
+                    
+                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-flash"></i></span>
+                      <span class="layout-footer-services-text">次日送達</span>
+                    
+                  </li>
+                  <li class="layout-footer-services-item">
+                    
+                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-repeat"></i></span>
+                      <span class="layout-footer-services-text">7 天無理由退貨</span>
+                    
+                  </li>
+                  <li class="layout-footer-services-item">
+                    
+                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-map-marker"></i></span>
+                      <span class="layout-footer-services-text">100+ 實體店面</span>
+                    
+                  </li>
+              </ul>
+                <div class="layout-footer-contact">
+                      <p class="layout-footer-contact-desc">24小時全國服務熱線</p>
+                      <a href="tel:0800-123-456" class="layout-footer-contact-tel">0800-123-456</a>
+                      <p>
+                            <a href="javascript:void(0);" class="layout-footer-contact-online">
+                                  <i class="layout-font layout-font-talk1"></i><span class="text">在線客服(未開放)</span>
+                            </a>
+                      </p>
+                </div>
           </div>
-        </div>
-        <div class="footer-service">
-          <span class="service-label">客服热线</span>
-          <span class="service-num">400-788-3333</span>
-          <a id="service-online" class="service-online" href="javascript:void(0);" title="在线客服">在线客服</a>
-        </div>
-        <div class="footer-outerLink">
-          <a class="footer-sinaMblog" href="#" target="_blank"><i class="i_icon"></i></a>
-
-          <a id="footer-weChat" class="footer-weChat" href="javascript:void(0);" target="_blank"><i class="i_icon"></i></a>
-          <a class="footer-qzone" href="#" target="_blank"><i class="i_icon"></i></a>
-        </div>
+          <div class="layout-footer-bottom clearfix">
+              <ul class="layout-footer-interlock clearfix">
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link">了解布殼</p>
+                  </li>
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link" >加入我们</p>
+                  </li>
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link" >联系我们</p>
+                  </li>
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link">布殼社区</p>
+                  </li>
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link">天猫旗舰店</p>
+                  </li>
+                  <li class="layout-footer-interlock-item">
+                      <p class="layout-footer-interlock-link" >问题反馈</p>
+                  </li>
+                  
+              </ul>
+              <div class="layout-footer-copyright clearfix">
+                      <span class="layout-footer-copyright-left">
+                            <a class="layout-footer-copyright-link copyright-text">&copy;2019 Booker Co., Ltd. All rights reserved.</a>
+                            <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                              <i class="layout-icon layout-icon-license"></i>
+                            </a>
+                            <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                              <i class="layout-icon layout-icon-wel"></i>
+                            </a>
+                            <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                                <i class="layout-icon layout-icon-trust"></i>
+                            </a>
+                       </span>
+                      <ul class="layout-footer-media clearfix">
+                            <li class="layout-footer-media-item">
+                                  <a href="#" class="layout-footer-media-link">
+                                        <i class="layout-font layout-font-weibo"></i>
+                                  </a>
+                                </li>
+                                    <li class="layout-footer-media-item">
+                                  <a href="javascript:void(0);" class="layout-footer-media-link wechat">
+                                        <i class="layout-font layout-font-wechat"></i>
+                                        <!-- <div class="layout-footer-media-wechat-qrcode">
+                                          <img class="layout-footer-media-wechat-img" src="" alt="微信二维码">
+                                        </div> -->
+                                  </a>
+                            </li>
+                            <li class="layout-footer-media-item">
+                                  <a href="#" class="layout-footer-media-link">
+                                        <i class="layout-font layout-font-qzone"></i>
+                                  </a>
+                            </li>
+                      </ul>
+              </div>
+          </div>
       </div>
-      <div class="clear"></div>
-      <div id="flymeCopyright" class="copyrightWrap">
-        <div class="copyrightInner">
-          <span>&copy;2017 Meizu Telecom Equipment Co., Ltd. All rights reserved.</span>
-          <a href="#" class="linkAGray" target="_blank">备案号: 粤ICP备13003602号-4</a>
-          <a href="#" class="linkAGray" target="_blank">经营许可证编号: 粤B2-20130198</a>
-          <a target="_blank" href="#" class="linkAGray">营业执照</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 底部区域 E -->
+    </footer><!-- 底部区域 E -->
 
 <script type="text/javascript">
   //

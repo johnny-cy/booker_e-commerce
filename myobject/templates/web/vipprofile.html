@@ -1,0 +1,113 @@
+{% extends "web/base.html" %}
+{% load static from staticfiles %}
+
+{% block mylink %}
+  <link rel="stylesheet" type="text/css" href="{% static 'web/css/order.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'web/css/order-app.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="main order">
+  <div class="container">
+	<!-- 面包屑导航 -->
+	<div class="crumbs col-xs-12 col-sm-12">
+	  <ol class="breadcrumb">
+		<li class="hidden-xs hidden-sm"><a href="index.html">首页</a></li>
+		<li class="hidden-xs hidden-sm"><a href="member.html">我的商城</a></li>
+		<li class="active">我的订单</li>
+	  </ol>
+	</div><!-- 面包屑导航 E-->
+		
+	<div class="main clearfix">
+		<!-- 左侧导航 -->
+		<div class="left-nav f-fl col-md-4 hidden-xs hidden-sm">
+			<div class="nav-main">
+				<a href="javascript:;" class="type-title"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>订单中心</a>
+				<a href="order.html" class="ml active" >我的订单</a>
+				<a href="#" class="ml " >我的回购单</a>
+				<a href="#" class="ml " >我的意外保</a>
+				<a href="javascript:;" class="type-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>个人中心</a>
+				<a href="/#" class="ml " >地址管理</a>
+				<a href="#" class="ml " >我的收藏</a>
+				<a href="#" class="ml " >消息提醒</a>
+				<a href="#" class="ml " >建议反馈</a>
+			</div>
+		</div><!-- 左侧导航 E-->
+			
+		<!-- 右侧内容展示 -->
+		<div class="span9">
+					<h1 align="center">
+						Edit Your Profile
+					</h1>
+					{% for uu in user %}
+					<form id="edit-profile" action="{% url 'vip_profile_update' uu.id %}" method="POST" class="form-horizontal" align="center">
+						{% csrf_token %}
+						<fieldset>
+							<legend>Your Profile</legend>
+							
+							<div class="control-group">
+								<label class="control-label" for="input01">Username</label>
+								<div class="controls">
+									<input type="text" name="username" class="input-xlarge" id="input01" value="{{uu.username}}" disabled/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="input01">Name</label>
+								<div class="controls">
+									<input type="text" name="name" class="input-xlarge" id="input01" value="{{uu.name}}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="input01">Phone</label>
+								<div class="controls">
+									<input type="text" name="phone"  class="input-xlarge" id="input01" value="{{uu.phone}}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="input01">Email</label>
+								<div class="controls">
+									<input type="text" name="email" class="input-xlarge" id="input01" value="{{uu.email}}" />
+								</div>
+							</div>				
+							<div class="control-group">
+								<label class="control-label" for="textarea">address</label>
+								<div class="controls">
+									<textarea class="input-xlarge" name="address" id="textarea" rows="1">{{uu.address}}</textarea>
+								</div>
+							</div>
+							<div class="control-group">
+                				<label class="control-label" for="input01">性别：</label>
+              					<div class="controls">
+               					    <input type="radio" name="sex" class="input-xlarge" id="input01" value="1" {% if uu.sex == 1 %}checked{% endif %} /> 男
+									<input type="radio" name="sex" class="input-xlarge" id="input01" value="0" {% if uu.sex == 0 %}checked{% endif %} /> 女
+								</div>
+							</div>
+							<H4>重置會員密碼信息</H4>
+				            <div class="control-group">
+				                <label class="control-label" for="input01">密码：</label>
+				                <div class="controls">
+				                    <input type="password" name="password" class="input-xlarge" />
+				                </div>
+				            </div>
+				            <div class="control-group">
+				                <label class="control-label" for="input01">重复密码：</label>
+				                <div class="controls">
+				                    <input type="password" name="repassword" class="input-xlarge" />
+				                </div>
+				            </div>			
+				            <br>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save</button> 
+							</div>
+							{% endfor %}
+							{% if messages %}
+							<span style="color:red;">{% for a in messages %}{{a}}{% endfor %}</span>
+							{% endif %}
+						</fieldset>
+					</form>
+				</div>
+	</div>
+  </div>	
+</div>
+<!-- 主内容区域 E-->
+{% endblock %}

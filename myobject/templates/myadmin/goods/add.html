@@ -22,42 +22,52 @@
                                     disabled
                                 {% endif %} 
                                  value="{{ vo.id }}">{{ vo.name }}</option>
+                            
+
                         {% endfor %}
                     </select>
+
                 </div>
             </div>
+             
             <div class="control-group">
-                <label class="control-label" for="input01">商品名称：</label>
+                <label class="control-label" for="input01">雜誌名稱：</label>
                 <div class="controls">
                     <input type="text" name="goods" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">生产厂家：</label>
+                <label class="control-label" for="input01">出版日期：</label>
                 <div class="controls">
-                    <input type="text" name="company" class="input-xlarge" id="input01"/>
+                    <input type="text" name="publish_date" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">单价：</label>
+                <label class="control-label" for="input01">語言：</label>
+                <div class="controls">
+                    <input type="text" name="language" class="input-xlarge" id="input01"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input01">單價：</label>
                 <div class="controls">
                     <input type="text" name="price" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">库存量：</label>
+                <label class="control-label" for="input01">庫存量：</label>
                 <div class="controls">
                     <input type="text" name="store" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">商品图片：</label>
+                <label class="control-label" for="input01">商品圖片：</label>
                 <div class="controls">
                     <input type="file" name="pic" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">商品简介：</label>
+                <label class="control-label" for="input01">商品簡介：</label>
                 <div class="form-group">
                     <!-- 可用渲染的方式將js snippet帶入, 或直接輸入硬代碼 -->
                     <!-- {{forms}} -->

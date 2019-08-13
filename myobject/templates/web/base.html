@@ -6,9 +6,9 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  	<title>魅族官网商城-提供魅族手机 PRO系列、MX系列、魅蓝（Note）系列的预约和购买</title>
-      <meta name="description" content="魅族在线商城是魅族面向全国服务的官方电商平台，提供魅族PRO系列、MX系列、魅蓝（Note）系列的手机、配件和智能硬件的预约和购买。官方正品，全场包邮。">
-      <meta name="Keywords" content="魅族手机官网商城、魅族官方在线商店、魅族在线商城、魅族官网在线商店、魅族商城">
+  	<title>BOOKER </title>
+      <meta name="description" content="Booker, an online book shop.">
+      <meta name="Keywords" content="Booker">
       <link href="{% static 'web/img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
       <link href="{% static 'web/img/favicon.ico' %}" rel="icon" type="image/x-icon">
     <!-- Bootstrap -->
@@ -25,10 +25,11 @@
     <!-- 自定义 -->
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/global.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/app.css' %}">
-    <script type="text/javascript" src="{% static 'web/js/rem.js' %}"></script>
-    <script type="text/javascript" src="{% static 'web/js/topNav.js' %}"></script>
     {% block mylink %}
     {% endblock%}
+    <script type="text/javascript" src="{% static 'web/js/rem.js' %}"></script>
+    <script type="text/javascript" src="{% static 'web/js/topNav2.js' %}"></script>
+    
 </head>
 <body>
   <!-- 导航 --> 
@@ -37,8 +38,8 @@
       <div class="container clearfix">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="layout-header-logo navbar-left">
-              <a target="_blank" href="{% url 'index' %}" class="layout-header-logo-link" alt="魅族科技">
-                <img src="{% static 'web/img/logo.png' %}">
+              <a target="_blank" href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
+                <H3>BOOKER</H3>
               </a>
           </div>
           <ul class="nav navbar-nav navbar-right layout-header-service clearfix">
@@ -56,7 +57,7 @@
                         <a href="{% url 'myinfo' %}?username={{request.session.vipuser.username}}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">个人中心</a>
                       </li>
                       <li class="layout-user-downmenu-item">
-                        <a href="#" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
+                        <a href="{% url 'cart_index' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
                       </li>
                       <li class="layout-user-downmenu-item">
                         <a href="{% url 'logout' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_mformy">退出</a>
@@ -73,9 +74,13 @@
                 </div>
             </li>
             <li class="layout-header-service-item layout-header-service-cart" id="layoutHeaderCart">
-                <a class="layout-header-service-link" href="#" data-mtype="wmz_public_yt_cart">
+                <a class="layout-header-service-link" href="{% url 'cart_index' %}" data-mtype="wmz_public_yt_cart">
                     <i class="glyphicon glyphicon-shopping-cart"></i>
-                    <span class="layout-header-service-cart-num">0</span>
+                    <span class="layout-header-service-cart-num">
+                      {% if request.session.vipuser %}
+                      {{request.session.shoplist.values|length}}
+                      {% endif %}
+                    </span>
                 </a>
             </li>
           </ul>
@@ -200,60 +205,36 @@
         <div class="layout-footer-top clearfix">
             <ul class="layout-footer-services clearfix">
                 <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank" >
+                  
                     <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-sd-video"></i></span>
-                    <span class="layout-footer-services-text">顺丰包邮</span>
-                  </a>
+                    <span class="layout-footer-services-text">郵政包郵</span>
+                  
                 </li>
                 <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank">
+                  
                     <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-flash"></i></span>
-                    <span class="layout-footer-services-text">100+ 城市次日送达</span>
-                  </a>
+                    <span class="layout-footer-services-text">次日送達</span>
+                  
                 </li>
                 <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank" >
+                  
                     <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-repeat"></i></span>
-                    <span class="layout-footer-services-text">7 天无理由退货</span>
-                  </a>
+                    <span class="layout-footer-services-text">7 天無理由退貨</span>
+                  
                 </li>
                 <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank" >
-                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-refresh"></i></span>
-                    <span class="layout-footer-services-text">15 天换货保障</span>
-                 </a>
-                </li>
-                <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank">
-                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-wrench"></i></span>
-                    <span class="layout-footer-services-text">1 年免费保修</span>
-                  </a>
-                </li>
-                <li class="layout-footer-services-item">
-                  <a href="#" class="layout-footer-services-link" target="_blank">
+                  
                     <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-map-marker"></i></span>
-                    <span class="layout-footer-services-text">2300+ 线下体验店</span>
-                  </a>
-                </li>
-                <li class="layout-footer-services-item">
-                    <a href="#" class="layout-footer-services-link" target="_blank">
-                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-sort"></i></span>
-                      <span class="layout-footer-services-text">远程支持服务</span>
-                    </a>
-                </li>
-                <li class="layout-footer-services-item">
-                    <a href="#" class="layout-footer-services-link" target="_blank" data-mtype="wmz_public_foot_homerepair">
-                      <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-home"></i></span>
-                      <span class="layout-footer-services-text">上门快修</span>
-                  </a>
+                    <span class="layout-footer-services-text">100+ 實體店面</span>
+                  
                 </li>
             </ul>
               <div class="layout-footer-contact">
-                    <p class="layout-footer-contact-desc">24小时全国服务热线</p>
-                    <a href="tel:400-788-3333" class="layout-footer-contact-tel">400-788-3333</a>
+                    <p class="layout-footer-contact-desc">24小時全國服務熱線</p>
+                    <a href="tel:0800-123-456" class="layout-footer-contact-tel">0800-123-456</a>
                     <p>
                           <a href="javascript:void(0);" class="layout-footer-contact-online">
-                                <i class="layout-font layout-font-talk1"></i><span class="text">在线客服</span>
+                                <i class="layout-font layout-font-talk1"></i><span class="text">在線客服(未開放)</span>
                           </a>
                     </p>
               </div>
@@ -261,38 +242,33 @@
         <div class="layout-footer-bottom clearfix">
             <ul class="layout-footer-interlock clearfix">
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link">了解魅族</a>
+                    <p class="layout-footer-interlock-link">了解布殼</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link" >加入我们</a>
+                    <p class="layout-footer-interlock-link" >加入我们</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link" >联系我们</a>
+                    <p class="layout-footer-interlock-link" >联系我们</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link" >Flyme</a>
+                    <p class="layout-footer-interlock-link">布殼社区</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link">魅族社区</a>
+                    <p class="layout-footer-interlock-link">天猫旗舰店</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link">天猫旗舰店</a>
+                    <p class="layout-footer-interlock-link" >问题反馈</p>
                 </li>
-                <li class="layout-footer-interlock-item">
-                    <a href="#" target="_blank" class="layout-footer-interlock-link" >问题反馈</a>
-                </li>
-                <li class="layout-footer-interlock-item">
-                    <a href="//www.meizu.com/authorization.html" target="_blank" class="layout-footer-interlock-link" >线上销售授权名单公示</a>
-                </li>
+                
             </ul>
             <div class="layout-footer-copyright clearfix">
                     <span class="layout-footer-copyright-left">
-                          <a class="layout-footer-copyright-link copyright-text">&copy;2017 Meizu Telecom Equipment Co., Ltd. All rights reserved.</a>
-                          <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">粤ICP备13003602号-2</a>
+                          <a class="layout-footer-copyright-link copyright-text">&copy;2019 Booker Co., Ltd. All rights reserved.</a>
+                          <!-- <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">粤ICP备13003602号-2</a>
                           <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">合字B2-20170010</a>
                           <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">营业执照</a>
                           <a class="layout-footer-copyright-link" hidefocus="true" href="3" target="_blank">法律声明</a>
-                          <a class="layout-footer-copyright-link">粤公网安备 44049102496009 号</a>
+                          <a class="layout-footer-copyright-link">粤公网安备 44049102496009 号</a> -->
                           <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
                             <i class="layout-icon layout-icon-license"></i>
                           </a>
@@ -305,16 +281,16 @@
                      </span>
                     <ul class="layout-footer-media clearfix">
                           <li class="layout-footer-media-item">
-                                <a href="http://weibo.com/meizumobile" class="layout-footer-media-link">
+                                <a href="#" class="layout-footer-media-link">
                                       <i class="layout-font layout-font-weibo"></i>
                                 </a>
-                          </li>
-                          <li class="layout-footer-media-item">
+                              </li>
+                                  <li class="layout-footer-media-item">
                                 <a href="javascript:void(0);" class="layout-footer-media-link wechat">
                                       <i class="layout-font layout-font-wechat"></i>
-                                      <div class="layout-footer-media-wechat-qrcode">
+                                      <!-- <div class="layout-footer-media-wechat-qrcode">
                                         <img class="layout-footer-media-wechat-img" src="" alt="微信二维码">
-                                      </div>
+                                      </div> -->
                                 </a>
                           </li>
                           <li class="layout-footer-media-item">

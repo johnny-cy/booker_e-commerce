@@ -5,7 +5,10 @@ from django.core.paginator import Paginator
 from common.models import Types,Goods
 from PIL import Image
 from datetime import datetime
+from django.utils import timezone
+
 import time,json,os
+import html
 #from django.forms import forms
 #from DjangoUeditor.forms import UEditorField
 
@@ -79,6 +82,7 @@ def add(request):
     
     list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
     context = {"typelist":list}
+
     return render(request,'myadmin/goods/add.html',context)
 
 #执行商品类别信息添加 
@@ -88,12 +92,11 @@ def insert(request):
         
         myajax_content = request.POST.get('content')
 
-        # 判断并执行图片上传，缩放等处理
+        # 判断是否有圖，并执行图片上传，缩放等处理
         myfile = request.FILES.get("pic", None)
         if not myfile:
-            return HttpResponse("没有上传文件信息！")
+            return HttpResponse("尚未上传雜誌封面圖！")
         # 以时间戳命名一个新图片名称
-        
         filename= str(time.time())+"."+myfile.name.split('.').pop()
         destination = open(os.path.join("./static/goods/",filename),'wb+')
         for chunk in myfile.chunks():      # 分块写入文件  
@@ -120,14 +123,15 @@ def insert(request):
         ob = Goods()
         ob.goods = request.POST['goods']
         ob.typeid = request.POST['typeid']
-        print(ob.typeid)
-        ob.company = request.POST['company']
+        ob.publish_date = request.POST['publish_date']
+        ob.language = request.POST['language']
         ob.price = request.POST['price']
         ob.store = request.POST['store']
-        ob.content = myajax_content
+        ob.content = html.unescape(myajax_content) # html.unescape 可以與前端的模板語法safe相呼應，避免亂碼 
         ob.picname = filename
         ob.state = 1
-        ob.addtime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # ob.addtime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ob.addtime = timezone.now()
         ob.save()
         context = {'info':'添加成功！'}
     except Exception as err:
@@ -211,7 +215,7 @@ def update(request,gid):
         ob = Goods.objects.get(id=gid)
         ob.goods = request.POST['goods']
         ob.typeid = request.POST['typeid']
-        ob.company = request.POST['company']
+        ob.publish_date = request.POST['publish_date']
         ob.price = request.POST['price']
         ob.store = request.POST['store']
         ob.content = request.POST['content']

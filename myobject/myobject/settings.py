@@ -26,7 +26,7 @@ SECRET_KEY = ')&zt(@@omd+q)8s$1crm6ab@8^-=rgfex-^^@7cm2^6525dsr^'
 DEBUG = True
 #DEBUG = False
 
-ALLOWED_HOSTS = ['13.229.197.21']
+ALLOWED_HOSTS = ['13.229.197.21','*']
 
 
 # Application definition
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -129,10 +129,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-#]
-STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+# STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")

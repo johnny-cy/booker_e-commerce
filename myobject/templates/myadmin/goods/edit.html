@@ -8,9 +8,9 @@
         {% csrf_token %}
         <input type="hidden" name="oldpicname" value="{{ goods.picname }}"/>
         <fieldset>
-            <legend>编辑商品信息</legend>
+            <legend>編輯商品信息</legend>
             <div class="control-group">
-                <label class="control-label" for="input01">商品类别：</label>
+                <label class="control-label" for="input01">商品類別：</label>
                 <div class="controls">
                     <select name="typeid">
                         {% for vo in typelist %}
@@ -28,37 +28,37 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">商品名称：</label>
+                <label class="control-label" for="input01">雜誌名稱：</label>
                 <div class="controls">
                     <input type="text" name="goods" value="{{ goods.goods }}" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">生产厂家：</label>
+                <label class="control-label" for="input01">出版日期：</label>
                 <div class="controls">
                     <input type="text" name="company" value="{{ goods.company }}" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">单价：</label>
+                <label class="control-label" for="input01">單價：</label>
                 <div class="controls">
                     <input type="text" name="price" value="{{ goods.price }}" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">库存量：</label>
+                <label class="control-label" for="input01">庫存量：</label>
                 <div class="controls">
                     <input type="text" name="store" value="{{ goods.store }}" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">商品图片：</label>
+                <label class="control-label" for="input01">商品圖片：</label>
                 <div class="controls">
                     <input type="file" name="pic" class="input-xlarge" id="input01"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">状态：</label>
+                <label class="control-label" for="input01">狀態：</label>
                 <div class="controls">
                     <input type="radio" name="state" class="input-xlarge" id="input01" 
                     {% if goods.state == 1 %}
@@ -78,7 +78,7 @@
                 </div>
             </div>    
             <div class="control-group">
-                <label class="control-label" for="input01">商品简介：</label>
+                <label class="control-label" for="input01">商品簡介：</label>
                 <!-- 下方的js代碼已經先指定id=ueditor 均為富文本編輯器 -->
                 <script id="ueditor" name="content"  style="display: inline-block;" type="text/plain"> 
                     {{ goods.content|safe }}
