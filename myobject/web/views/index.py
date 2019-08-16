@@ -28,7 +28,7 @@ def index(request):
     # print('the temp list is like '+str(temp)) # correct [2,4,10,7]
     typelist_3 = Types.objects.filter(id__in=temp) # pylint: disable=maybe-no-member
     # [print(i.name) for i in typelist_3]
-    goodslist = Goods.objects.all() # pylint: disable=maybe-no-member
+    goodslist = Goods.objects.raw("SELECT a.* FROM goods a WHERE 5>=(SELECT COUNT(*) FROM goods b WHERE a.typeid=b.typeid AND a.addtime>=b.addtime);") # pylint: disable=maybe-no-member
 
     context = {'typelist': typelist,
                'goods_by_click': goods_by_click,

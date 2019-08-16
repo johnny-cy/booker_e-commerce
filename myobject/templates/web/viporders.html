@@ -39,9 +39,10 @@
 			<div class="order-main">
 				<div class="type-tab-btn">
 					<a href="{% url 'vip_orders' %}" class="allOrder active col-20" data-type="-1">全部订单</a><i class="line hidden-xs hidden-sm">|</i>
-					<a class="waitPay col-20" href="{% url 'vip_orders' %}?state=2" data-type="0">待付款<span class="amount _actAmount"></span></a><i class="line hidden-xs hidden-sm">|</i>
+					<a class="waitPay col-20" href="{% url 'vip_orders' %}?state=0" data-type="0">待付款<span class="amount _actAmount"></span></a><i class="line hidden-xs hidden-sm">|</i>
 					<a class="waitDeliver col-20" href="{% url 'vip_orders' %}?state=1" data-type="1">待发货</a><i class="line hidden-xs hidden-sm">|</i>
 					<a class="hasDeliver col-20" href="{% url 'vip_orders' %}?state=3" data-type="2">已发货</a><i class="line hidden-xs hidden-sm">|</i>
+					<a class="hasCanceled col-20" href="{% url 'vip_orders' %}?state=4" data-type="2">已撤銷</a><i class="line hidden-xs hidden-sm">|</i>
 					<a class="other col-20" href="javascript:;" data-type="99">其他</a>
 				</div>
 				<div class="list-head hidden-xs hidden-sm">
@@ -99,7 +100,7 @@
 											{% for detail in orders.detaillist %}
 											<div class="item b-t clearfix j-item j-iamMain" style="height:110px;">
 												<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' detail.goodsid %}" target="_blank">
-													<img src="/static/goods/s_{{detail.picname}}" style="width:75px;height:75px" class="f-fl"/>
+													<img src="/static/goods/{{detail.picname}}" style="width:75px;height:75px" class="f-fl"/>
 												</a>
 												<div class="describe f-fl col-xs-8 col-sm-8">
 													<div class="vertic clearfix">
@@ -127,7 +128,7 @@
 										   <div>
 										   	{% if orders.state == 0 %}
 							                    新订单 <br/><br/><br/>
-							                    【<a href="{% url 'vip_odstate' %}?oid={{orders.id}}&state=3">撤销订单</a>】
+							                    【<a href="{% url 'vip_odstate' %}?oid={{orders.id}}&state=4">撤销订单</a>】
 							                {% elif orders.state == 1 %}
 							                    已发货 <br/><br/>
 							                    【<a href="{% url 'vip_odstate' %}?oid={{orders.id}}&state=2">确认收货</a>】
@@ -135,7 +136,9 @@
 							                    已完成
 							                {% elif orders.state == 3 %}
 							                    无效订单
-							                {% else %}
+											{% elif orders.state == 4 %}
+												已撤銷
+											{% else %}
 							                    未知
 							                {% endif %}
 										   </div>

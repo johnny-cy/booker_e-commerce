@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect,reverse
-from common.models import Goods,Types,Orders,Detail
+from common.models import Goods,Types,Orders,Detail,Users
 from datetime import datetime
+import hashlib
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 # 公共信息加载
 def loadinfo(request):
@@ -14,20 +17,38 @@ def loadinfo(request):
 
 def viporders(request):
 	context = loadinfo(request)
-	odlist = Orders.objects.filter(uid=request.session['vipuser']['id'])
+	# 用登錄者id去查找訂單
+	odlist = Orders.objects
+	odlist = odlist.filter(uid=request.session['vipuser']['id'])
+	# print result = <QuerySet [<Orders: Orders object (20180005)>, <Orders: Orders object (20180006)>]>
+	# 獲取前台回傳的state
+	state = request.GET.get('state',0)
+	if state != 0:
+		# 將odlist再過濾第二次
+		odlist = odlist.filter(state=state)
+	# 遍歷訂單
 	for od in odlist:
-		dlist = Detail.objects.filter(orderid=od.id)
-		for og in dlist:
-			og.picname = Goods.objects.only('picname').get(id=og.goodsid).picname
-		od.detaillist = dlist
+		# 用訂單id去查找詳情, 並存入detaillist
+		detaillist = Detail.objects.filter(orderid=od.id)
+		# detaillist = Detail.objects.all()
+		print("detillist ...")
+		print(detaillist)
+		# 遍歷詳情，並放入商品模塊中的picname到詳情內
+		for g in detaillist:
+			g.picname = Goods.objects.only('picname').get(id=g.goodsid).picname
+			print("this is g.pickname = "+g.picname)
+		# 將新的詳情加入odlist當中，屬性名稱同為detaillist
+		od.detaillist = detaillist
+	paginator = Paginator(odlist,5)
+	page = request.GET.get('page')
+	page_list = paginator.get_page(page)
 
-	context['orderslist'] = odlist
-
-	return render(request,"web/viporders.html",context)
+	context['orderslist'] = page_list
+	return render(request,'web/viporders.html',context)
 
 def odstate(request):
 	try:
-		oid = request.GET.get('oid','0') 
+		oid = request.GET.get('oid','0')
 		a = Orders.objects.get(id=oid)
 		a.state = request.GET.get('state')
 		a.save()
@@ -36,6 +57,41 @@ def odstate(request):
 		print(err)
 		return HttpResponse("訂單處理失敗!")
 
+def profile(request):
+	user = Users.objects.filter(username=request.session['vipuser']['username'])
+	context = {'user':user}
+	return render(request,"web/vipprofile.html", context)
 
-
-
+from django.contrib import messages
+def update_profile(request,uid):
+	'''加载编辑信息页面'''
+	try:
+		print('start')
+		user = Users.objects.get(id=uid)
+		print(user)
+		user.name = request.POST['name']
+		print(user.name)
+		user.phone = request.POST['phone']
+		print(user.phone)
+		user.email = request.POST['email']
+		print(user.email)
+		user.address = request.POST['address']
+		print(user.address)
+		user.sex = request.POST['sex']
+		print(user.sex)
+		if request.POST['password'] :
+			pwd = request.POST['password']
+			repwd = request.POST['repassword']
+			if pwd != repwd:
+				messages.info(request,"密碼輸入不一致!")
+				return redirect(reverse('vip_profile'))
+			m = hashlib.md5()
+			m.update(bytes(request.POST['password'], encoding="utf8"))
+			user.password = m.hexdigest()
+		user.save()
+		context = {"user":user}
+		context["info"] = "個人信息修改成功! "
+		return render(request,"web/vipprofileinfo.html",context)
+	except Exception as err:
+		context={"info":"没有找到要修改的信息！"}
+		return render(request,"web/vipprofileinfo.html",context)

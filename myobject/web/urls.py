@@ -31,10 +31,10 @@ urlpatterns = [
     url(r'^orders/insert$', orders.insert,name='orders_insert'), #执行订单添加操作
 
 	# 會員中心
-	# url(r'^vip/orders$', vip.viporders,name='vip_orders'), #会员中心我的订单
-    # url(r'^vip/odstate$', vip.odstate,name='vip_odstate'), #修改订单状态（确认收货）
-    # url(r'^vip/profile$', vip.profile,name='vip_profile'), #
-    # url(r'^vip/profile/update/(?P<uid>[0-9]+)$', vip.update_profile,name='vip_profile_update'), #
+	url(r'^vip/orders$', vip.viporders,name='vip_orders'), #会员中心我的订单
+    url(r'^vip/odstate$', vip.odstate,name='vip_odstate'), #修改订单状态（确认收货）
+    url(r'^vip/profile$', vip.profile,name='vip_profile'), #
+    url(r'^vip/profile/update/(?P<uid>[0-9]+)$', vip.update_profile,name='vip_profile_update'), #
     #url(r'^vip/info$', vip.info,name='vip_info'), #会员中心的个人信息
     #url(r'^vip/update$', vip.update,name='vip_update'), #执行修改会员信息
     #url(r'^vip/resetps$', vip.resetps,name='vip_resetps'), #重置密码表单

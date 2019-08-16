@@ -80,28 +80,18 @@ def insert(request):
         for shop in orderslist.values():
             
             del shoplist[str(shop['id'])]
-            print("thhis is loop")
             ov = Detail()
             ov.orderid = od.id
-            print("thhis is loop")
             ov.goodsid = shop['id']
-            print("thhis is loop")
-            #ov.name = shop['goods']
-            print('this is shit')
             ov.price = shop['price']
-            print('this is shit')
             ov.num = shop['m']
-            print('this is shit')
-            #print(ov.name)
             ov.save()
-            print("this is loopend")
         del request.session['orderslist']  
         del request.session['total']
         request.session['shoplist'] = shoplist
         context = {"info":"订单添加成功！订单号："+str(od.id)}
         return render(request,"web/info.html",context)
     except Exception as err:
-        print("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
         print(err)
         context = {"info":"订单添加失败，请稍后再试！"}
         return render(request,"web/info.html",context)

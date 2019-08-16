@@ -61,7 +61,7 @@ class Goods(models.Model):
     addtime = models.DateTimeField(default=datetime.now)
 
     def toDict(self):
-        return {'id': self.id, 'typeid': self.typeid, 'goods': self.goods, 'company': self.company, 'price': self.price, 'picname': self.picname, 'store': self.store, 'num': self.num, 'clicknum': self.clicknum, 'state': self.state}
+        return {'id': self.id, 'typeid': self.typeid, 'goods': self.goods, 'publish_date': self.publish_date, 'price': self.price, 'picname': self.picname, 'store': self.store, 'num': self.num, 'clicknum': self.clicknum, 'state': self.state}
 
     class Meta:
         db_table = "goods"  # 更改表名
