@@ -3,6 +3,8 @@ from django.http import HttpResponse
 import hashlib
 from common.models import Users, Types, Goods
 from django.db.models import Q
+from django.core.paginator import Paginator
+
 
 
 # 前台首页
@@ -39,54 +41,59 @@ def index(request):
 
 
 def lists(request, pIndex=1):
-
+    context = {}
     # 獲取前端問號變數回傳的值
     tid = int(request.GET.get('tid', 0))
     orderby = request.GET.get('orderby', None)
-
     # 查詢根類別項目, 分類瀏覽使用
-    typelist = Types.objects.filter(pid=0) # pylint: disable=maybe-no-member
-    context = {'typelist': typelist}
-
-    # 查詢所有商品
-    goodslist = Goods.objects.all() # pylint: disable=maybe-no-member
-    context['goodslist'] = goodslist
-
+    typelist = Types.objects.filter(pid=0) 
     # 做一個比對的字典，在類別表當中，每一個大類底下對映著那些子類，而當大類的tid傳入的時候，就把它底下的子類群列表，再拿商品表當中filter(typeid__in=子類群) 篩選出來後輸出到前端
     # 製作大類id列表
     typelist_tmp_parent = []
     [typelist_tmp_parent.append(i.id) for i in typelist]
+    print(typelist_tmp_parent) # [25]
     typelist_tmp_child = []
-    typelist_2 = Types.objects.exclude(pid=0) # pylint: disable=maybe-no-member
+    
+    typelist_2 = Types.objects.exclude(pid=0) # 所有商品
     [typelist_tmp_child.append(i.id) for i in typelist_2]
-
+    print(typelist_tmp_child) # [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+    
+    context['typelist_2']= typelist_2
+    print(context['typelist_2'])
+    
     try:
 
         if tid in typelist_tmp_child:
             print("this is from in typelist_tmp_child")
             context['q_tid'] = 'tid='+str(tid)+'&'  # q_tid作為子類別商品查詢使用
-            context['goodslist'] = Goods.objects.filter(typeid=tid) # pylint: disable=maybe-no-member
+            context['goodslist'] = Goods.objects.filter(typeid=tid) # 單一id
         elif tid in typelist_tmp_parent:
             print("this is from in typelist_tmp_parent")
             context['q_tid'] = 'tid='+str(tid)+'&'  # q_tid作為子類別商品查詢使用
-            # 用pid與id自組path，並以此path篩選
+            # 父類id求其子類，必須使用0,父id
             tmp = "0,"+str(tid)+","
-            tmp2 = Types.objects.filter(path=tmp) # pylint: disable=maybe-no-member
-            context['goodslist'] = Goods.objects.filter( # pylint: disable=maybe-no-member
-                typeid__in=[i.id for i in tmp2])
+            tmp2 = Types.objects.filter(path=tmp) 
+            context['goodslist'] = Goods.objects.filter(typeid__in=[i.id for i in tmp2]) # 多個id
+        else:
+            context['goodslist'] = Goods.objects.all()
         if orderby:
-            a = context['goodslist'].order_by(orderby)
-            context['goodslist'] = a
+            context['goodslist'] = context['goodslist'].order_by(orderby)
             if '-' in orderby:
                 context['q_orderby'] = 'orderby=' + \
-                    orderby[1:]+'&'  # q_orderby作為依排序查詢使用
+                    orderby[1:]+'&'  # q_orderby作為依排序查詢使用 此處迴傳的有兩種可能(點擊率、價格)
             else:
                 context['q_orderby'] = 'orderby=-' + \
                     orderby+'&'  # 正負號表升降冪排序，每次判斷切換
+        # paginator
+        paginator = Paginator(context['goodslist'],20)
+        page = request.GET.get('page')
+        page_list = paginator.get_page(page)
+        context['goodslist'] = page_list
 
     except Exception as err:
         print(err)
         return HttpResponse("error...")
+
     return render(request, "web/list.html", context)
 
 

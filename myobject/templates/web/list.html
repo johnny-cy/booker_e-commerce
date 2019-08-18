@@ -29,8 +29,8 @@
             <div class="mod-value-list">
               <ul>
               	<a href="{% url 'lists' %}" title="全部">全部</a>
-              	{% for type in typelist %}
-              		<a href="{% url 'lists' %}?tid={{type.id}}" title="">{{type.name}}</a>
+              	{% for type in typelist_2 %}
+              		<a href="{% url 'lists' %}?tid={{type.id}}" title="">|{{type.name}}</a>
                 {% endfor %}
               </ul>
             </div>
@@ -150,7 +150,24 @@
           </div>
           
           {% endfor %}
-            
+          <!-- 分頁功能 -->
+          <div class="pagination">
+            <span class="step-links">
+                {% if goodslist.has_previous %}
+                    <a href="?{{q_tid}}page=1">起始頁</a>
+                    <a href="?{{q_tid}}page={{ goodslist.previous_page_number }}">上一頁</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ goodslist.number }} of {{ goodslist.paginator.num_pages }}.
+                </span>
+
+                {% if goodslist.has_next %}
+                    <a href="?{{q_tid}}page={{ goodslist.next_page_number }}">下一頁</a>
+                    <a href="?{{q_tid}}page={{ goodslist.paginator.num_pages }}">最末頁</a>
+                {% endif %}
+            </span>
+        </div>
       </div>
     </div>
        

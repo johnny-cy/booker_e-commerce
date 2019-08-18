@@ -60,8 +60,8 @@
             <input class="inp-focus" name="password" id="password" maxlength="16"  autocomplete="off" placeholder="登入密碼" type="password"/>
            </div>
           <div class="normalInput fieldInput passwd-box">
-            <input class="inp-focus" name="code" style="width:100px;" maxlength="16" placeholder="驗證碼" autocomplete="off" type="text" />
-            <img src="{% url 'myadmin_verify' %}?id=1" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random()"/>
+            <input class="inp-focus" name="code" style="width:100px;" maxlength="16" placeholder="驗證碼" autocomplete="off" type="text" onKeyDown="javascript:if(event.keyCode==13)document.mainForm.submit();" />
+            <img src="{% url 'myadmin_verify' %}?id=1" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random();"/>
            </div>
 
            <a id="register" href="javascript:document.mainForm.submit();" class="fullBtnBlue">登入</a>
