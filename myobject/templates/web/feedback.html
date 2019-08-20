@@ -1,0 +1,38 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block mylink %}
+    <script src="{% static 'ueditor/ueditor.config.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.all.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.parse.js' %}"></script>
+{% endblock %}
+{% block main %}   
+    <div class="text-center">     
+        <h3 class="bg-primary">
+            意見反饋
+        </h3>
+        <form id="edit-profile" action="{% url 'vip_feedback' %}" class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="bg-success pt-5">
+                
+                
+                <div style="padding: 50px">
+                    <!-- 下方的js代碼已經先指定id=ueditor 均為富文本編輯器 -->
+                    <script id="ueditor" name="content"  style="display: inline-block;" type="text/plain"> 
+                    </script>
+                    <!-- script之間為文本內容 -->
+                    
+                    <!-- 下方JS為指定富文本id以及工具列按鈕、視窗寬高、服務器路由位址（同時傳參初始化） -->
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('ueditor',{'toolbars': [['source', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'formatmatch', 'autotypeset', '|', 'forecolor', 'backcolor', '|', 'link', 'unlink', '|', 'simpleupload', 'attachment']], 'initialFrameWidth': 600, 'initialFrameHeight': 300, 'serverUrl': '/ueditor/controller/?imageMaxSize=1204000&imagePathFormat=images%2F&filePathFormat=files%2F'});
+                        
+                    </script>
+                </div>                        
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">送出</button> <button type="reset" class="btn">重置</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <br/>
+   
+{% endblock %}

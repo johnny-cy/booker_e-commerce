@@ -17,6 +17,9 @@
             <ol class="breadcrumb">
               <li><a href="./index.html">首页</a></li>
               <li><a href="#">全部商品</a></li>
+              {% if t_name %}
+              <li><a href="#">{{t_name}}</a></li>
+              {% endif %}
             </ol>
       </div>
       <!-- 面包屑 导航 E-->
@@ -30,7 +33,7 @@
               <ul>
               	<a href="{% url 'lists' %}" title="全部">全部</a>
               	{% for type in typelist_2 %}
-              		<a href="{% url 'lists' %}?tid={{type.id}}" title="">|{{type.name}}</a>
+              		<a href="{% url 'lists' %}?tid={{type.id}}" title="">| {{type.name}}</a>
                 {% endfor %}
               </ul>
             </div>

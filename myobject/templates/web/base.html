@@ -38,7 +38,7 @@
       <div class="container clearfix">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="layout-header-logo navbar-left">
-              <a target="_blank" href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
+              <a target="_self" href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
                 <H3>BOOKER</H3>
               </a>
           </div>
@@ -257,7 +257,7 @@
                     <p class="layout-footer-interlock-link">天猫旗舰店</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link" >问题反馈</p>
+                    <a href="{% url 'vip_feedback' %}"class="layout-footer-interlock-link" >问题反馈</a>
                 </li>
                 
             </ul>

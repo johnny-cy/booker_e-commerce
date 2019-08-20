@@ -6,6 +6,30 @@ from datetime import datetime
 import hashlib
 from django.core.paginator import Paginator
 from django.db.models import Q
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.header import Header
+import html
+
+MAIL_SERVER_ADDR_ = "smtp.gmail.com"
+MAIL_SERVER_SSL_PORT_ = 465
+MAIL_SERVER_STARTTLS_PORT_ = 587
+SENDER_ = "smtplibmail01"
+SENDER_PASSWD_ = "thisissick123"
+RECEIVER_ = ["smtplibmail01@gmail.com",]
+
+# 公共郵件寄送加載
+def send_smtp_ssl(msg):
+	# create an instance with server addr and port.
+	server = smtplib.SMTP_SSL(MAIL_SERVER_ADDR_, MAIL_SERVER_SSL_PORT_)
+	# login with mail account/password.
+	server.login(SENDER_, SENDER_PASSWD_)
+	# sendmail with addr of sender, receiver and message to send out.
+	server.sendmail(SENDER_, RECEIVER_, msg)
+	# disconnect
+	server.quit()
+	print("send_smtp_SSL success!")
 
 # 公共信息加载
 def loadinfo(request):
@@ -95,3 +119,18 @@ def update_profile(request,uid):
 	except Exception as err:
 		context={"info":"没有找到要修改的信息！"}
 		return render(request,"web/vipprofileinfo.html",context)
+
+def feedback(request):
+	if request.method == 'GET':
+		
+		return render(request, "web/feedback.html")
+	elif request.method == 'POST':
+		myajax_content = html.unescape(request.POST.get('content'))
+		message = MIMEMultipart()
+		message['From'] = Header(r"BOOKER網", "utf-8")
+		message['To'] = Header(r"", "utf-8")
+		message['Subject'] = Header(r"從網站內寄出的反饋意見，來自"+request.session['vipuser']['username'], "utf-8")
+		message.attach(MIMEText(myajax_content, 'html','utf-8')) 
+		send_smtp_ssl(message.as_string())
+		context = {"info" : "謝謝您的反饋，我們將竭誠為您服務！"}
+		return render(request,"web/info.html",context)

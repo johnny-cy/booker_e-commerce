@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^list/(?P<pIndex>[0-9]+)$', index.lists, name="lists"),# 商品列表
 	url(r'^detail/(?P<gid>[0-9]+)$', index.detail, name='detail'),
 
+	url(r'^login/(?P<path>\S+)$', index.login_with_next, name='login'),
 	url(r'^login/$', index.login, name='login'),
 	url(r'^dologin/$', index.dologin, name='dologin'),
 	url(r'^logout/$', index.logout, name='logout'),
@@ -39,5 +40,6 @@ urlpatterns = [
     #url(r'^vip/update$', vip.update,name='vip_update'), #执行修改会员信息
     #url(r'^vip/resetps$', vip.resetps,name='vip_resetps'), #重置密码表单
     #url(r'^vip/doresetps$', vip.doresetps,name='vip_doresetps'), #执行重置密码
+	url(r'^vip/feedback/$', vip.feedback, name='vip_feedback'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

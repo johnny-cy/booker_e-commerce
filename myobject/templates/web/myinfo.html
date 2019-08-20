@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title> Flyme 账号 - 登录</title>
+    <title> 帳號登入</title>
        <link href="{% static 'web/img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
     <link href="{% static 'web/img/favicon.ico' %}" rel="icon" type="image/x-icon">
     <!-- Bootstrap -->
@@ -33,9 +33,9 @@
     <nav class="navbar navbar-default header ">
       <div class="container clearfix">
           <div class="layout-header-logo navbar-left">
-              <a href="{% url 'index' %}" class="layout-header-logo-link" alt="魅族科技">
-                <img src="{% static 'web/img/logo.png' %}">
-              </a>
+            <a target="_self" href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
+              <H3>BOOKER</H3>
+            </a>
           </div>      
       </div>
     </nav>
@@ -49,7 +49,7 @@
         <form id="mainForm" name="mainForm" action="{% url 'myinfo' %}" method="post" class="main-form">
           {% csrf_token %}
           <div class="tab-title">
-            <a class="linkAGray" id="toAccountLogin" href="javascript:void(0);">账号註冊</a>
+            <a class="linkAGray" id="toAccountLogin" href="javascript:void(0);">帳號註冊</a>
           </div><br/>
           {% if info %}
           <div class="tip-box">
@@ -84,7 +84,7 @@
           </div>
           email邮箱：
            <div class="normalInput fieldInput ">
-            <input class="inp-focus" name="email" id="email" maxlength="16"  autocomplete="off" placeholder="{% if ob.email %}{{ob.email}}{% else %}email@..{% endif %}" />
+            <input class="inp-focus" name="email" id="email" maxlength="16"  autocomplete="off" placeholder="{% if ob.email %}123{% else %}email@..{% endif %}" />
           </div>
           登录密码：
           <div class="normalInput fieldInput ">
