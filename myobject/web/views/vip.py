@@ -16,7 +16,7 @@ MAIL_SERVER_ADDR_ = "smtp.gmail.com"
 MAIL_SERVER_SSL_PORT_ = 465
 MAIL_SERVER_STARTTLS_PORT_ = 587
 SENDER_ = "smtplibmail01"
-SENDER_PASSWD_ = "thisissick123"
+SENDER_PASSWD_ = ""
 RECEIVER_ = ["smtplibmail01@gmail.com",]
 
 # 公共郵件寄送加載
