@@ -69,15 +69,21 @@
     <div class="pagination">
     <ul>
         <li>
-            <a href="{% url 'myadmin_goods_index' pIndex|add:-1 %}?{{ mywhere|join:'&' }}">&laquo;</a>
+            <a href="{% url 'myadmin_goods_index' 1 %}?{{ mywhere|join:'&' }}">起始頁</a>
+            <a href="{% url 'myadmin_goods_index' pIndex|add:-10 %}?{{ mywhere|join:'&' }}">&laquo;{{tail_dots}}</a>
+            
         </li>
+        
         {% for p in plist %}
         <li {% if pIndex == p %}class="active"{% endif %}>
             <a href="{% url 'myadmin_goods_index' p %}?{{ mywhere|join:'&' }}">{{p}}</a>
         </li>
         {% endfor %}
+        
         <li>
-            <a href="{% url 'myadmin_goods_index' pIndex|add:1 %}?{{ mywhere|join:'&' }}">&raquo;</a>
+            
+            <a href="{% url 'myadmin_goods_index' pIndex|add:10 %}?{{ mywhere|join:'&' }}">{{head_dots}}&raquo;</a>
+            <a href="{% url 'myadmin_goods_index' maxpages %}?{{ mywhere|join:'&' }}">最末頁</a>
         </li>
    
     </ul>

@@ -15,15 +15,14 @@ def index(request):
 		sex = request.GET.get('sex')
 		print(sex)
 		if keywords :
-			keywords = keywords.split(" ") #split後若有空格，則會變成list類型，可多個一併查詢
-			print(keywords) #['張三','李四']
+			keywords = keywords.split(" ") # split後若有空格，則會變成list類型，可多個一併查詢
 			
 			users = users.filter(Q(username__in=keywords)|Q(name__in=keywords))
 		if sex == "0" or sex =="1" :
 			users = users.filter(Q(sex__in=sex))
 			# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
 		users = users.all()	
-		p = Paginator(users,2)
+		p = Paginator(users,5)
 		page = request.GET.get('page')
 		page_list = p.get_page(page)
 		return render(request,"myadmin/users/index.html", {'page_list':page_list,"keywords":keywords,"sex":sex})
@@ -40,7 +39,7 @@ def insert(request):
 		ob = Users()
 		ob.username = request.POST.get('username')
 		ob.name = request.POST.get('name')
-		#获取密码并md5
+		# 获取密码并md5
 		m = hashlib.md5()
 		m.update(bytes(request.POST.get('password'),encoding='utf8'))
 		ob.password = m.hexdigest()
@@ -113,7 +112,7 @@ def resetPwd(request,uid):
 			if pwd != repwd:
 				messages.info(request,"密碼輸入不一致!")
 				print("密碼輸入不一致!")
-				#return redirect("/myadmin/users/reset_pwd/"+uid) 
+				# return redirect("/myadmin/users/reset_pwd/"+uid) 
 				return redirect(reverse('myadmin_users_reset_pwd',kwargs={'uid':uid}))
 			md5 = hashlib.md5()
 			md5.update(bytes(pwd,encoding='utf8'))

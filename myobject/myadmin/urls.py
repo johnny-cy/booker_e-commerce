@@ -35,7 +35,7 @@ urlpatterns = [
 
 
     # 后台商品信息管理
-    url(r'^goods/(?P<pIndex>[0-9]+)$', goods.index, name="myadmin_goods_index"),
+    url(r'^goods/(?P<pIndex>[-0-9]+)$', goods.index, name="myadmin_goods_index"),
     url(r'^goods/add$', goods.add, name="myadmin_goods_add"),
     url(r'^goods/insert$', goods.insert, name="myadmin_goods_insert"),
     url(r'^goods/del/(?P<gid>[0-9]+)$', goods.delete, name="myadmin_goods_del"),

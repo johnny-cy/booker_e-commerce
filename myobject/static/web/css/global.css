@@ -391,12 +391,10 @@ ul,li{
 	overflow:hidden;
 	left:-20px;
 	top:54px;
-	-webkit-animation:.3s ease showUserDownMenu forwards 1;
-	animation:.3s ease showUserDownMenu forwards 1;
+	
 }
-.layout-user-downmenu.layout-user-downmenu-show {
-	display:block
-}
+
+
 .layout-user-downmenu.layout-user-downmenu-login {
 	-webkit-animation:.3s ease showUserLoginDownMenu forwards 1;
 	animation:.3s ease showUserLoginDownMenu forwards 1
@@ -411,7 +409,7 @@ ul,li{
 	-webkit-user-select:none;
 	-moz-user-select:none;
 	-ms-user-select:none;
-	user-select:none
+	user-select:none;
 }
 .layout-user-downmenu .layout-user-downmenu-list:after,.layout-user-downmenu .layout-user-downmenu-list:before {
 	position:absolute;
@@ -437,7 +435,8 @@ ul,li{
 	transition:color .3s
 }
 .layout-user-downmenu .layout-user-downmenu-link:hover {
-	color:#00c3f5
+	color:#00c3f5;
+	display:block;
 }
 .layout-user-downmenu .layout-user-downmenu-num {
 	position:absolute;
@@ -445,13 +444,19 @@ ul,li{
 	color:#e02b41
 }
 
+/* dropdown */
+
+
+
+
+
 /*导航 E*/
 
 /*主内容区域*/
 .mainbody{
 	overflow: hidden;
-    	position: relative;
-    	width: 100%;
+	position: relative;
+	width: 100%;
 }
 /*banner 轮播*/
 .headBanner{
@@ -497,7 +502,6 @@ ul,li{
 	height:480px;
 	width:244px;
 	background-color:rgba(248,247,247,.8);
-	background-color:#f8f7f7\9;
 	z-index:2
 }
 .home-category .home-category-item {
@@ -860,7 +864,7 @@ ul,li{
     	top:0;
     	left:0;
     	width: 100px;
-    	height: 30px;`
+    	height: 30px;
 }
 .mbf-nav{
 	margin-left: 110px;
@@ -1257,7 +1261,7 @@ ul,li{
 	-webkit-transform:perspective(400px);
 	transform:perspective(400px);
 }/*楼层鼠标经过动画 E*/
-
+}
 /*登录下拉动画*/
 @-webkit-keyframes showUserLoginDownMenu {
 	0% {
@@ -1288,5 +1292,5 @@ ul,li{
 	height:138px
 }
 /*登录下拉动画 E*/
-
+}
 /*动画 E*/

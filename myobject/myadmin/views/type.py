@@ -24,7 +24,7 @@ def add(request,tid):
         context = {'pid':ob.id,'path':ob.path+str(ob.id)+',','name':ob.name}
     return render(request,'myadmin/type/add.html',context)
 
-#执行商品类别信息添加    
+# 执行商品类别信息添加    
 def insert(request):
     try:
         ob = Types()

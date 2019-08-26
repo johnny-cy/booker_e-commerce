@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^list/(?P<pIndex>[0-9]+)$', index.lists, name="lists"),# 商品列表
 	url(r'^detail/(?P<gid>[0-9]+)$', index.detail, name='detail'),
 
-	url(r'^login/(?P<path>\S+)$', index.login_with_next, name='login'),
+	# url(r'^login/(?P<path>\S+)$', index.login_with_next, name='login'),
 	url(r'^login/$', index.login, name='login'),
 	url(r'^dologin/$', index.dologin, name='dologin'),
 	url(r'^logout/$', index.logout, name='logout'),

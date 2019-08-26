@@ -9,8 +9,8 @@ from django.utils import timezone
 
 import time,json,os
 import html
-#from django.forms import forms
-#from DjangoUeditor.forms import UEditorField
+# from django.forms import forms
+# from DjangoUeditor.forms import UEditorField
 
 
 
@@ -29,12 +29,12 @@ import html
 # 浏览商品信息
 def index(request,pIndex):
     '''浏览信息'''
-    #获取商品类别信息
+    # 获取商品类别信息
     tlist = Types.objects.extra(select={'_h':'concat(path,id)'}).order_by('_h')
     for ob in tlist:
         ob.pname = '---'*(ob.path.count(',')-1)
 
-    mywhere=[] #定义一个用于存放搜索条件列表
+    mywhere=[] # 定义一个用于存放搜索条件列表
 
     # 获取、判断并封装关keyword键搜索
     kw = request.GET.get("keyword",None)
@@ -56,24 +56,37 @@ def index(request,pIndex):
         list = list.filter(state=state)
         mywhere.append("state="+state)
 
-    #执行分页处理
+    # 执行分页处理
     pIndex = int(pIndex)
-    page = Paginator(list,5) #以5条每页创建分页对象
-    maxpages = page.num_pages #最大页数
-    #判断页数是否越界
+    page = Paginator(list,5) # 以5条每页创建分页对象
+    maxpages = page.num_pages # 最大页数
+    # 判断页数是否越界
     if pIndex > maxpages:
         pIndex = maxpages
     if pIndex < 1:
         pIndex = 1
-    list2 = page.page(pIndex) #当前页数据
-    plist = page.page_range   #页码数列表
-
-    #遍历商品信息，并获取对应的商品类别名称，以typename名封装
+    list2 = page.page(pIndex) # 当前页数据
+    # 遍历商品信息，并获取对应的商品类别名称，以typename名封装
     for vo in list2:
         ty = Types.objects.get(id=vo.typeid)
         vo.typename = ty.name
-    #封装信息加载模板输出
-    context = {'typelist':tlist,"goodslist":list2,'plist':plist,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere,'typeid':int(typeid)}
+    # 封装信息加载模板输出
+    context = {'typelist':tlist,"goodslist":list2,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere,'typeid':int(typeid)}
+    
+    if maxpages <= 10:
+        plist = page.page_range   # 页码数列表,
+    elif maxpages > 10 and pIndex <= 10:
+        plist = range(1,11)
+        context['head_dots'] = '...'
+    elif maxpages > 10 and pIndex + 5 < maxpages:
+        plist = range(pIndex-5,pIndex+6)
+        context['head_dots'] = '...'
+        context['tail_dots'] = '...'
+    elif maxpages > 10 and pIndex + 5 >= maxpages:
+        plist = range(maxpages-10,maxpages)
+        context['tail_dots'] = '...'
+    context['plist'] = plist
+
     return render(request,"myadmin/goods/index.html",context)
     
 # 商品信息添加表单
@@ -85,13 +98,10 @@ def add(request):
 
     return render(request,'myadmin/goods/add.html',context)
 
-#执行商品类别信息添加 
+# 执行商品类别信息添加 
 def insert(request):
     try:
-        
-        
         myajax_content = request.POST.get('content')
-
         # 判断是否有圖，并执行图片上传，缩放等处理
         myfile = request.FILES.get("pic", None)
         if not myfile:
@@ -103,7 +113,6 @@ def insert(request):
             destination.write(chunk)  
         destination.close()
         
-
         # 执行图片缩放
         im = Image.open("./static/goods/"+filename)
         # 缩放到375*375:
@@ -145,11 +154,11 @@ def delete(request,gid):
     try:
         # 获取被删除商品信的息量，先删除对应的图片
         ob = Goods.objects.get(id=gid)
-        #执行图片删除
+        # 执行图片删除
         os.remove("./static/goods/"+ob.picname)   
         os.remove("./static/goods/m_"+ob.picname)   
         os.remove("./static/goods/s_"+ob.picname)
-        #执行商品信息的删除 
+        # 执行商品信息的删除 
         ob.delete()
         context = {'info':'删除成功！'}
     except Exception as err:
@@ -171,7 +180,7 @@ def edit(request,gid):
         # 获取商品的类别信息
         list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
         # 放置信息加载模板
-        #context = {"typelist":list,'goods':ob,'forms':forms}
+        # context = {"typelist":list,'goods':ob,'forms':forms}
         context = {"typelist":list,'goods':ob}
         return render(request,"myadmin/goods/edit.html",context)
     except Exception as err:
@@ -224,14 +233,14 @@ def update(request,gid):
         ob.save()
         context = {'info':'修改成功！'}
         if b:
-            os.remove("./static/goods/m_"+oldpicname) #执行老图片删除  
-            os.remove("./static/goods/s_"+oldpicname) #执行老图片删除  
-            os.remove("./static/goods/"+oldpicname) #执行老图片删除  
+            os.remove("./static/goods/m_"+oldpicname) # 执行老图片删除  
+            os.remove("./static/goods/s_"+oldpicname) # 执行老图片删除  
+            os.remove("./static/goods/"+oldpicname) # 执行老图片删除  
     except Exception as err:
         print(err)
         context = {'info':'修改失败！'}
         if b:
-            os.remove("./static/goods/m_"+picname) #执行新图片删除  
-            os.remove("./static/goods/s_"+picname) #执行新图片删除  
-            os.remove("./static/goods/"+picname) #执行新图片删除  
+            os.remove("./static/goods/m_"+picname) # 执行新图片删除  
+            os.remove("./static/goods/s_"+picname) # 执行新图片删除  
+            os.remove("./static/goods/"+picname) # 执行新图片删除  
     return render(request,"myadmin/info.html",context)

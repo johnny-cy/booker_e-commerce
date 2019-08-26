@@ -9,7 +9,7 @@
 <!-- BODY -->
 {% block main %}
 <!-- 主内容区域 -->
-  <div class="mainbody app">
+  <div class="mainbody">
   <!-- 热卖推荐 -->
   <div class="home-hot">
     <div class="container">
@@ -27,14 +27,9 @@
                   <a href="{% url 'detail' goods.id %}"><img src="{% static 'goods/' %}{{goods.picname}}" class="home-product-img">
                   <div class="caption">
                     <h4 class="home-product-title">{{goods.goods}}</h4>
-                    <!-- <h6 class="home-product-subtitle red">
-                           <span class="mb-hh-red">月销</span>  
-                               累计超18000台
-                    </h6> -->
                     <p class="home-product-bottom">                                    
                       <span class="home-product-price">{{goods.price}}
                           <span class="home-product-start-tag"></span> 
-                      
                       </span>
                       <span class="home-product-price origin">{{goods.price|add:100}}</span>          
                     </p>

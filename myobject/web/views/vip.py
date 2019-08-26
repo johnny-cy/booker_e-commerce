@@ -16,7 +16,7 @@ MAIL_SERVER_ADDR_ = "smtp.gmail.com"
 MAIL_SERVER_SSL_PORT_ = 465
 MAIL_SERVER_STARTTLS_PORT_ = 587
 SENDER_ = "smtplibmail01"
-SENDER_PASSWD_ = ""
+SENDER_PASSWD_ = "thisissick123"
 RECEIVER_ = ["smtplibmail01@gmail.com",]
 
 # 公共郵件寄送加載
@@ -92,17 +92,11 @@ def update_profile(request,uid):
 	try:
 		print('start')
 		user = Users.objects.get(id=uid)
-		print(user)
 		user.name = request.POST['name']
-		print(user.name)
 		user.phone = request.POST['phone']
-		print(user.phone)
 		user.email = request.POST['email']
-		print(user.email)
 		user.address = request.POST['address']
-		print(user.address)
 		user.sex = request.POST['sex']
-		print(user.sex)
 		if request.POST['password'] :
 			pwd = request.POST['password']
 			repwd = request.POST['repassword']

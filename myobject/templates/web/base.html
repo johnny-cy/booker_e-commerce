@@ -51,10 +51,10 @@
                   <span>{{request.session.vipuser.username}}</span>
                 </a>
                 <div class="layout-user-downmenu">
-                  <ul class="layout-user-downmenu-list">
+                  <ul class="layout-user-downmenu-list layout-user-downmenu-show">
                     {% if request.session.vipuser %}
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'myinfo' %}?username={{request.session.vipuser.username}}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">个人中心</a>
+                        <a href="{% url 'myinfo' %}?username={{request.session.vipuser.username}}" class="layout-user-downmenu-link " data-mtype="wmz_public_grzx_myorder">个人中心</a>
                       </li>
                       <li class="layout-user-downmenu-item">
                         <a href="{% url 'vip_orders' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
@@ -67,7 +67,7 @@
                         <a href="{% url 'login' %}" class="layout-user-downmenu-link">立即登录</a>
                       </li>
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'register' %}" target="_blank" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_register">立即注册</a>
+                        <a href="{% url 'register' %}" target="_blank" class="layout-user-downmenu-link" >立即注册</a>
                       </li>
                     {% endif %}
                   </ul>
@@ -182,19 +182,20 @@
     <div class="scroll-view">
       <header id="header" class="header">
         <div class="logo">
-          <a href="./index.html">
-              <img src="{% static 'web/img/app/mlogo1.jpg' %}">
+          <a href="{% url 'index' %}">
+              <H3>BOOKER</H3>
           </a>
         </div>
 
         <div class="qtool">
             <a id="btn-search"><i class="glyphicon  glyphicon-search"></i></a>
-            <a href="#"><i class="glyphicon  glyphicon-shopping-cart"></i></a>
+            <a href="{% url 'cart_index' %}"><i class="glyphicon  glyphicon-shopping-cart"></i></a>
             <a id="user-name" href="#"><i class="glyphicon glyphicon-user"></i></a>
         </div>
       </header>
     </div>
-  </div><!-- 导航 E--> 
+  </div>
+  <!-- 导航 E--> 
 
 {% block main %}
   

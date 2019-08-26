@@ -4,17 +4,20 @@ import hashlib
 from common.models import Users, Types, Goods
 from django.db.models import Q
 from django.core.paginator import Paginator
-import redis
-
+from django.db import connections
 
 
 
 # 前台首页
 # ===========================================================
 
+def custom_sql(sql):
+    with connections['mydb'].cursor() as cursor:
+        cursor.execute(sql)
+        data = cursor.fetchall() 
+        return data
 
 def index(request):
-    r = redis.Redis(host='localhost', port=6379, db= 0)
     # ---熱門點擊率區塊---
     # 讀取類別表
     typelist = Types.objects.filter(pid=0)  # 只讀取基類pid=0 # pylint: disable=maybe-no-member
@@ -26,7 +29,7 @@ def index(request):
     # 讀取類別表
     # typelist_2 = Types.objects.exclude(pid=0)  # 只讀取子類pid not 0
     # 從商品表中獲取現有商品的typeid
-    goodslist_tmp = goods_obj.only('typeid').all() # pylint: disable=maybe-no-member
+    # goodslist_tmp = goods_obj.only('typeid').all() # pylint: disable=maybe-no-member
     # temp = []
     # for goods in goodslist_tmp:
     #     if r.sadd('tmp_list', goods.typeid):
@@ -38,6 +41,8 @@ def index(request):
     #     if goods.typeid not in temp:
     #         temp.append(goods.typeid)
     # print('the temp list is like '+str(temp)) # correct [2,4,10,7]
+    # temp = custom_sql("SELECT DISTINCT typeid FROM goods;")
+    # print(temp)
     # typelist_3 = Types.objects.filter(id__in=temp) # pylint: disable=maybe-no-member
     typelist_3 = Types.objects.exclude(pid=0)
     # [print(i.name) for i in typelist_3]
@@ -133,7 +138,7 @@ def dologin(request):
     # 校验验证码
     print("DOLOGIN")
     verifycode = request.session['verifycode']
-    code = request.POST['code']
+    code = request.POST['code'].upper()
     nextpage = request.POST['nextpage']
     print("this is nextpage ",nextpage)
     if verifycode != code:

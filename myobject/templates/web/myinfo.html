@@ -44,7 +44,7 @@
   <!-- 主内容区域 -->
   <div id="content" class="content">  
     <div class="container-fluid"> 
-    <div class="banner-box hidden-xs hidden-sm">
+    <div class="">
       <div class="container">
         <form id="mainForm" name="mainForm" action="{% url 'myinfo' %}" method="post" class="main-form">
           {% csrf_token %}
@@ -105,52 +105,105 @@
     </div>
   </div>
   <!-- 主内容区域  E-->
-
-  <!-- 底部区域 -->
-  <div id="flymeFooter " class="footerWrap hidden-xs hidden-sm">
+      <!-- 底部区域 -->
+ <footer class="layout-footer  hidden-xs hidden-sm">
     <div class="container">
-      <div class="footer-layer1">
-        <div class="footer-innerLink">
-          <a href="#" target="_blank" title="关于魅族">关于魅族</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="工作机会">工作机会</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="联系我们">联系我们</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-          <a href="#" target="_blank" title="法律声明">法律声明</a>
-          <img class="foot-line" src="{% static 'web/img/space.gif' %}">
-
-          <div href="javascript:void(0);" id="globalName" class="footer-language" title="简体中文">
-            简体中文&nbsp;&nbsp;&nbsp;
-            <div id="globalContainer" class="footer-language_menu">
-              <a href="#" id="i18n-link" title="English" class="ClobalItem">English</a>
+        <div class="layout-footer-top clearfix">
+            <ul class="layout-footer-services clearfix">
+                <li class="layout-footer-services-item">
+                  
+                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-sd-video"></i></span>
+                    <span class="layout-footer-services-text">郵政包郵</span>
+                  
+                </li>
+                <li class="layout-footer-services-item">
+                  
+                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-flash"></i></span>
+                    <span class="layout-footer-services-text">次日送達</span>
+                  
+                </li>
+                <li class="layout-footer-services-item">
+                  
+                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-repeat"></i></span>
+                    <span class="layout-footer-services-text">7 天無理由退貨</span>
+                  
+                </li>
+                <li class="layout-footer-services-item">
+                  
+                    <span class="layout-footer-service-wrap"><i class="glyphicon glyphicon-map-marker"></i></span>
+                    <span class="layout-footer-services-text">100+ 實體店面</span>
+                  
+                </li>
+            </ul>
+              <div class="layout-footer-contact">
+                    <p class="layout-footer-contact-desc">24小時全國服務熱線</p>
+                    <a href="tel:0800-123-456" class="layout-footer-contact-tel">0800-123-456</a>
+                    <p>
+                          <a href="javascript:void(0);" class="layout-footer-contact-online">
+                                <i class="layout-font layout-font-talk1"></i><span class="text">在線客服(未開放)</span>
+                          </a>
+                    </p>
+              </div>
+        </div>
+        <div class="layout-footer-bottom clearfix">
+            <ul class="layout-footer-interlock clearfix">
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link">了解布殼</p>
+                </li>
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link" >加入我们</p>
+                </li>
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link" >联系我们</p>
+                </li>
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link">布殼社区</p>
+                </li>
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link">天猫旗舰店</p>
+                </li>
+                <li class="layout-footer-interlock-item">
+                    <p class="layout-footer-interlock-link" >问题反馈</p>
+                </li>
+                
+            </ul>
+            <div class="layout-footer-copyright clearfix">
+                    <span class="layout-footer-copyright-left">
+                          <a class="layout-footer-copyright-link copyright-text">&copy;2019 Booker Co., Ltd. All rights reserved.</a>
+                          <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                            <i class="layout-icon layout-icon-license"></i>
+                          </a>
+                          <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                            <i class="layout-icon layout-icon-wel"></i>
+                          </a>
+                          <a class="layout-footer-copyright-link" hidefocus="true" href="#" rel="nofollow" target="_blank">
+                              <i class="layout-icon layout-icon-trust"></i>
+                          </a>
+                     </span>
+                    <ul class="layout-footer-media clearfix">
+                          <li class="layout-footer-media-item">
+                                <a href="#" class="layout-footer-media-link">
+                                      <i class="layout-font layout-font-weibo"></i>
+                                </a>
+                              </li>
+                                  <li class="layout-footer-media-item">
+                                <a href="javascript:void(0);" class="layout-footer-media-link wechat">
+                                      <i class="layout-font layout-font-wechat"></i>
+                                      <!-- <div class="layout-footer-media-wechat-qrcode">
+                                        <img class="layout-footer-media-wechat-img" src="" alt="微信二维码">
+                                      </div> -->
+                                </a>
+                          </li>
+                          <li class="layout-footer-media-item">
+                                <a href="#" class="layout-footer-media-link">
+                                      <i class="layout-font layout-font-qzone"></i>
+                                </a>
+                          </li>
+                    </ul>
             </div>
-          </div>
         </div>
-        <div class="footer-service">
-          <span class="service-label">客服热线</span>
-          <span class="service-num">400-788-3333</span>
-          <a id="service-online" class="service-online" href="javascript:void(0);" title="在线客服">在线客服</a>
-        </div>
-        <div class="footer-outerLink">
-          <a class="footer-sinaMblog" href="#" target="_blank"><i class="i_icon"></i></a>
-
-          <a id="footer-weChat" class="footer-weChat" href="javascript:void(0);" target="_blank"><i class="i_icon"></i></a>
-          <a class="footer-qzone" href="#" target="_blank"><i class="i_icon"></i></a>
-        </div>
-      </div>
-      <div class="clear"></div>
-      <div id="flymeCopyright" class="copyrightWrap">
-        <div class="copyrightInner">
-          <span>&copy;2017 Meizu Telecom Equipment Co., Ltd. All rights reserved.</span>
-          <a href="#" class="linkAGray" target="_blank">备案号: 粤ICP备13003602号-4</a>
-          <a href="#" class="linkAGray" target="_blank">经营许可证编号: 粤B2-20130198</a>
-          <a target="_blank" href="#" class="linkAGray">营业执照</a>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- 底部区域 E -->
+  </footer><!-- 底部区域 E -->
 
 <script type="text/javascript">
   //
