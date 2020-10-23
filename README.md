@@ -1,3 +1,3 @@
 # booker_e-commerce
-An mostly self-built online shopping website by using python Django and MySQL. It is rather simple but workable. 
+A mostly self-built online shopping website by using python Django and MySQL. It is rather simple but workable. 
 My first README
