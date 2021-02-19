@@ -240,6 +240,7 @@ def update(request,gid):
         ob.goods = request.POST['goods']
         ob.typeid = request.POST['typeid']
         ob.publish_date = request.POST['publish_date']
+        print("ob.publish_date: ", ob.publish_date)
         ob.price = request.POST['price']
         ob.store = request.POST['store']
         ob.content = request.POST['content']
