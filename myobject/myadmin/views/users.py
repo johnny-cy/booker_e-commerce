@@ -25,8 +25,9 @@ def index(request):
 			users = users.all()	
 			print("users: ", users)
 			p = Paginator(users,5)
-			page = request.GET.get('page', 0)
+			page = request.GET.get('page')
 			page_list = p.get_page(page)
+			print("page_list: ", page_list)
 		except Exception as e:
 			print("err occured.")
 			print(e)
