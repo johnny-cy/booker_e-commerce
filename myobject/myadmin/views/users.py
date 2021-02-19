@@ -23,7 +23,7 @@ def index(request):
 			# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
 		users = users.all()	
 		print("users: ", users)
-		p = Paginator(users,5)
+		p = Paginator(users,1)
 		page = request.GET.get('page')
 		page_list = p.get_page(page)
 		return render(request,"myadmin/users/index.html", {'page_list':page_list,"keywords":keywords,"sex":sex})
