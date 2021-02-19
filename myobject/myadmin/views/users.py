@@ -25,7 +25,7 @@ def index(request):
 	# p = Paginator(users,5)
 	# page = request.GET.get('page')
 	# page_list = p.get_page(page)
-	print("page_list: ", page_list)
+	# print("page_list: ", page_list)
 	context = {}
 	# context['page_list'] = page_list
 	context['keywords'] = keywords
