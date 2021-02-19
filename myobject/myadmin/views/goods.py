@@ -123,6 +123,7 @@ def insert(request):
             return HttpResponse("尚未上传雜誌封面圖！")
         # 以时间戳命名一个新图片名称
         filename= str(time.time())+"_.jpg"
+        print("time.time:", time.time())
         print("222")
         print(filename)
         destination = open(os.path.join("./static/goods/",filename),'wb+')
