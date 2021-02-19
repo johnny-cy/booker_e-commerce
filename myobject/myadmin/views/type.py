@@ -18,7 +18,7 @@ def index(request):
 def add(request,tid):
     # 获取父类别信息，若没有则默认为根类别信息
     if tid == '0':
-        context = {'pid':0,'path':'0,','name':'根类别'}
+        context = {'pid':0,'path':'0,','name':'根類別'}
     else:
         ob = Types.objects.get(id=tid)
         context = {'pid':ob.id,'path':ob.path+str(ob.id)+',','name':ob.name}
