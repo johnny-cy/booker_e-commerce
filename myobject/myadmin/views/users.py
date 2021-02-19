@@ -22,6 +22,7 @@ def index(request):
 			users = users.filter(Q(sex__in=sex))
 			# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
 		users = users.all()	
+		print("users: ", users)
 		p = Paginator(users,5)
 		page = request.GET.get('page')
 		page_list = p.get_page(page)
