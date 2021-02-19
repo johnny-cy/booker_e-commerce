@@ -15,7 +15,7 @@
 				<img src="{% url 'myadmin_verify' %}" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random()">
 				<!-- 驗證碼snippets -->
 				<button type="submit" class="btn btn-primary">登入</button>
-				<button type="submit" class="btn">忘記密碼</button><span>暫不開放</span>
+				<button type="submit"  disable class="btn">忘記密碼</button><span>暫不開放</span>
 			</form>	
 		<span style="color:red">{{ info }}</span>
 		</div>
