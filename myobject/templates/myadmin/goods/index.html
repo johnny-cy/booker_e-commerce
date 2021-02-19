@@ -1,5 +1,5 @@
 {% extends "myadmin/base.html" %}
-
+{% static load %}
 {% block main %}                
     <h4>
         商品信息管理
@@ -46,7 +46,7 @@
                 <td>{{ vo.id }}</td>
                 <td>{{ vo.goods }}</td>
                 <td>{{ vo.typename }}</td>
-                <td><img src="/static/goods/s_{{ vo.picname }}" width="60"/></td>
+                <td><img src="{% static 'goods/s_'|add:vo.picname %}" width="60"/></td>
                 <td>{{ vo.price }}</td>
                 <td>{{ vo.clicknum }}</td>
                 <td>
