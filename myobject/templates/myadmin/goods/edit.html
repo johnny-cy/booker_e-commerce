@@ -97,5 +97,5 @@
         </fieldset>
     </form>
     <br/>
-    <img src="/static/goods/m_{{ goods.picname }}"/>
+    <img src="{% static 'goods/m_'|add:goods.picname %}"/>
 {% endblock %}
