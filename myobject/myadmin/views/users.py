@@ -8,6 +8,7 @@ from django.db.models import Q
 
 # 浏览会员
 def index(request):
+	print("dddddddddddddddddddddddddddd")
 	users = Users.objects
 	keywords = request.GET.get('keywords', '')
 	sex = request.GET.get('sex')
