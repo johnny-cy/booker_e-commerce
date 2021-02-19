@@ -10,22 +10,25 @@ from django.db.models import Q
 def index(request):
 
 	if request.method == "GET":
-		users = Users.objects
-		keywords = request.GET.get('keywords', '')
-		sex = request.GET.get('sex')
-		print("sex:", sex)
-		if keywords :
-			keywords = keywords.split(" ") # split後若有空格，則會變成list類型，可多個一併查詢
-			
-			users = users.filter(Q(username__in=keywords)|Q(name__in=keywords))
-		if sex == "0" or sex =="1" :
-			users = users.filter(Q(sex__in=sex))
-			# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
-		users = users.all()	
-		print("users: ", users)
-		p = Paginator(users,5)
-		page = request.GET.get('page', 0)
-		page_list = p.get_page(page)
+		try:
+			users = Users.objects
+			keywords = request.GET.get('keywords', '')
+			sex = request.GET.get('sex')
+			print("sex:", sex)
+			if keywords :
+				keywords = keywords.split(" ") # split後若有空格，則會變成list類型，可多個一併查詢
+				
+				users = users.filter(Q(username__in=keywords)|Q(name__in=keywords))
+			if sex == "0" or sex =="1" :
+				users = users.filter(Q(sex__in=sex))
+				# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
+			users = users.all()	
+			print("users: ", users)
+			p = Paginator(users,5)
+			page = request.GET.get('page', 0)
+			page_list = p.get_page(page)
+		except Exception as e:
+			print(e)
 		return render(request,"myadmin/users/index.html", {'page_list':page_list,"keywords":keywords,"sex":sex})
 
 # 打開添加會員表單
