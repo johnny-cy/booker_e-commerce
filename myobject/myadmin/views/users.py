@@ -36,8 +36,7 @@ def index(request):
 
 # 打開添加會員表單
 def add(request):
-	return render(request,"myadmin/users/index.html")
-	# return render(request,"myadmin/users/add.html")
+	return render(request,"myadmin/users/add.html")
 
 # 執行添加會員表單
 import hashlib
