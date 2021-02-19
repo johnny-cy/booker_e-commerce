@@ -27,8 +27,13 @@ def index(request):
 		page = request.GET.get('page')
 		page_list = p.get_page(page)
 		print("page_list: ", page_list)
-		# return render(request,"myadmin/users/index.html", {'page_list':page_list, "keywords":keywords, "sex":sex})
-		return render(request,"myadmin/users/add.html")
+		context = {}
+		context['page_list'] = page_list
+		context['keywords'] = keywords
+		context['sex'] = sex
+		context['users'] = users
+		return render(request,"myadmin/users/index.html", context)
+		# return render(request,"myadmin/users/add.html")
 
 # 打開添加會員表單
 def add(request):
