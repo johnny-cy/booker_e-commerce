@@ -1,0 +1,74 @@
+{% extends "myadmin/base.html" %}
+
+{% block main %}                
+    <h4>
+        會員信息管理
+    </h4>
+    <div class="control-group">
+        <form method="GET" action="" enctype="multipart/form-data">
+            關鍵字：
+            <input type="text" name="keywords" class='span2' placeholder="請輸入姓名" />
+            性別：
+            <select name ='sex' class='span1'>
+                <option value="2">全部</option>
+                <option value="1">男</option>
+                <option value="0">女</option>
+            </select>
+            <input type='submit' value="查詢">
+        </form>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <div class="pagination">
+                <ul>
+                    {% if page_list.has_previous %}
+                    <li ><a href="?page={{ page_list.previous_page_number }}&keywords={{keywords}}&sex={{sex}}">&lt;</a></li>
+                    {% else %}
+                    <li ><a  href="?page=1&keywords={{keywords}}&sex={{sex}}">&laquo;</a></li>
+                    {% endif %}
+
+                    {% for num in page_list.paginator.page_range %}
+                    <li {% if num == page_list.number %}class="active"{% endif %}>
+                        <a href="?page={{ num }}&keywords={{keywords}}&sex={{sex}}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+
+                    {% if page_list.has_next %}
+                    <li><a href="?page={{ page_list.next_page_number }}&keywords={{keywords}}&sex={{sex}}">&gt;</a></li>
+                    {% else %}
+                    <li ><a href="?page={{ page_list.paginator.num_pages }}&keywords={{keywords}}&sex={{sex}}">&raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <tr>
+                <th>帳號</th>
+                <th>真實姓名</th>
+                <th>性別</th>
+                <th>郵箱</th>
+                <th>註冊時間</th>
+                <th>狀態</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vo in users %}
+            <tr>
+                <td>{{ vo.username }}</td>
+                <td>{{ vo.name }}</td>
+                <td>{% if vo.sex == 1 %}男{% else %}女{% endif %}</td>
+                <td>{{ vo.email }}</td>
+                <td>{{ vo.addtime|date:'Y-m-d H:i:s' }}</td>
+                <td>{{ vo.state }}</td>
+                <td>
+                    <a href="{% url 'myadmin_users_del' vo.id %}" class="view-link">刪除</a>
+                    <a href="{% url 'myadmin_users_edit' vo.id %}" class="view-link">編輯</a>
+                    <a href="{% url 'myadmin_users_reset_pwd' vo.id %}" class="view-link">重置密碼</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>                
+   

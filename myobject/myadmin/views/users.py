@@ -30,7 +30,7 @@ def index(request):
 	context['keywords'] = keywords
 	context['sex'] = sex
 	context['users'] = users
-	return render(request,"myadmin/users/index.html")
+	return render(request,"myadmin/users/index2.html", context)
 
 # 打開添加會員表單
 def add(request):
