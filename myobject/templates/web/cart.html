@@ -38,7 +38,7 @@
                 <td class="cart-col-select col-md-3 col-xs-4 col-sm-4">  
                   <div class="mz-checkbox checked" gid="{{shop.id}}" price="{% widthratio  shop.price 1 shop.m %}"></div> 
                   <a href="{% url 'detail' shop.id %}" class="cart-product-link" target="_blank">
-                    <img src="/static/goods/s_{{ shop.picname }}" class="cart-product-img" alt="{{ shop.goods }}" width="50">
+                    <img src="{% static 'goods/s_'|add:shop.picname %}" class="cart-product-img" alt="{{ shop.goods }}" width="50">
                   </a>
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-8 col-sm-8">
@@ -115,7 +115,7 @@
             <span class="cart-footer-text">元， 合計(不含運費)：</span>
             <span class="cart-footer-total" id="totalPrice">0.0</span>
           </span>
-          <div onclick="window.location='/orders/add?ids='+loadTotal().join(',')" class="mz-btn btn-success" id="cartSubmit">去結算</div>
+          <div onclick="window.location='{% url 'orders_add' %}?ids='+loadTotal().join(',')" class="mz-btn btn-success" id="cartSubmit">去結算</div>
         </div>
       </div>
     </div><!-- 结算详情 E-->

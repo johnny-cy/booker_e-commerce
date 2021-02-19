@@ -16,7 +16,7 @@
         <tbody>
           <tr>
             <td class="cart-col-select col-md-12">
-                当前位置： 订单处理 > 2/3 确认订单信息：
+                當前位置： 訂單處理 > 2/3 確認訂單信息：
             </td>
           </tr>
         </tbody>
@@ -29,7 +29,7 @@
             <tbody>
               <tr class="cart-product" style="height:60px;border:none;">
                 <td class="cart-col-select col-md-2 col-xs-3 col-sm-3" style="text-align: right;">
-                  联系人：
+                  聯繫人：
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-4 col-sm-4">
                   <input readonly type="text" name="linkman"  value="{{ request.POST.linkman}}" size="40"/>
@@ -37,7 +37,7 @@
               </tr>
               <tr class="cart-product" style="height:60px;border:none;">
                 <td class="cart-col-select col-md-2 col-xs-3 col-sm-3" style="text-align: right;">
-                  收货地址：
+                  收貨地址：
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-4 col-sm-4">
                   <input readonly type="text" name="address"  value="{{ request.POST.address}}" size="40"/>
@@ -45,7 +45,7 @@
               </tr>
               <tr class="cart-product" style="height:60px;border:none;">
                 <td class="cart-col-select col-md-2 col-xs-3 col-sm-3" style="text-align: right;">
-                  联系电话：
+                  聯繫電話：
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-4 col-sm-4">
                   <input readonly type="text" name="phone" value="{{ request.POST.phone}}" size="40"/>
@@ -53,7 +53,7 @@
               </tr>
               <tr class="cart-product" style="height:60px;border:none;">
                 <td class="cart-col-select col-md-2 col-xs-3 col-sm-3" style="text-align: right;">
-                  邮编：
+                  郵遞編號：
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-4 col-sm-4">
                   <input readonly type="text" name="code"  value="{{ request.POST.code}}" size="40"/>
@@ -61,7 +61,7 @@
               </tr>
               <tr class="cart-product" style="height:60px;border:none;">
                 <td class="cart-col-select col-md-2 col-xs-3 col-sm-3" style="text-align: right;">
-                  总金额：
+                  總金額：
                 </td>
                 <td class="cart-col-name col-md-3 col-xs-4 col-sm-4">
                   <input type="text" disabled value="{{ request.session.total }} 元"  name="linkman" size="40"/>
@@ -77,7 +77,7 @@
       <div class="container">
         <div class="cart-footer-right col-md-12" style="text-align:center">
           <div onclick="window.history.go(-1)" class="mz-btn btn-success" id="cartSubmit">返回修改</div>
-          <button type="submit" class="mz-btn btn-success" id="cartSubmit">确认下单</button>
+          <button type="submit" class="mz-btn btn-success" id="cartSubmit">確認下單</button>
         </div>
       </div>
     </div><!-- 操作按钮 E-->
@@ -90,10 +90,10 @@
         <tbody>
           <tr>
             <td class="cart-col-name col-md-3 hidden-xs hidden-sm">商品</td>
-            <td class="cart-col-name col-md-3 hidden-xs hidden-sm">图片</td>
-            <td class="cart-col-price col-md-2 hidden-xs hidden-sm">单价(元)</td>
-            <td class="cart-col-number col-md-2 hidden-xs hidden-sm">数量</td>
-            <td class="cart-col-total col-md-1 hidden-xs hidden-sm">小计(元)</td>
+            <td class="cart-col-name col-md-3 hidden-xs hidden-sm">圖片</td>
+            <td class="cart-col-price col-md-2 hidden-xs hidden-sm">單價(元)</td>
+            <td class="cart-col-number col-md-2 hidden-xs hidden-sm">數量</td>
+            <td class="cart-col-total col-md-1 hidden-xs hidden-sm">小計(元)</td>
           </tr>
         </tbody>
       </table><!-- 订单详情头 E-->
@@ -112,7 +112,7 @@
                 </td>
                 <td class="cart-col-name col-md-3 hidden-xs hidden-sm">
                    <p>
-                      <div class="mz-adder-num"><img src="/static/goods/s_{{ shop.picname }}" alt="{{ shop.goods }}" width="50"></div>
+                      <div class="mz-adder-num"><img src="{% static 'goods/s_'|add:shop.picname  %}" alt="{{ shop.goods }}" width="50"></div>
                   </p>
                 </td>
                 <td class="cart-col-price col-md-2 hidden-xs hidden-sm">

@@ -28,13 +28,14 @@
           <!-- Tab panes -->
           <div class="tab-content preview-booth pt10">
             <div role="tabpanel" class="tab-pane active mod-pic" id="list-p1">
-              <img  src="/static/goods/{{goods.picname}}" width="375" height="375"  class="sImg">
+              <img  src="{% static 'goods/'|add:goods.picname %}" width="375" height="375"  class="sImg">
+
             </div>
             <div role="tabpanel" class="tab-pane mod-pic" id="list-p2">
-              <img  src="/static/goods/{{goods.picname}}" width="375" height="375" class="sImg">
+              <img  src="{% static 'goods/'|add:goods.picname %}" width="375" height="375" class="sImg">
             </div>
             <div role="tabpanel" class="tab-pane mod-pic" id="list-p3">
-              <img  src="/static/goods/{{goods.picname}}" width="375" height="375" class="sImg">
+              <img  src="{% static 'goods/'|add:goods.picname %}" width="375" height="375" class="sImg">
             </div>
           </div>
 
@@ -42,17 +43,17 @@
           <ul class="nav nav-tabs preview-thumb clearfix " role="tablist">
             <li role="presentation" class="active">
               <a href="#list-p1" aria-controls="list-p1" role="tab" data-toggle="tab">
-                <img  src="/static/goods/{{goods.picname}}" style="display: inline;" width="75" height="75">
+                <img  src="{% static 'goods/'|add:goods.picname %}" style="display: inline;" width="75" height="75">
               </a>
             </li>
             <li role="presentation">
               <a href="#list-p2" aria-controls="list-p2" role="tab" data-toggle="tab">
-                <img  src="/static/goods/{{goods.picname}}" style="display: inline;" width="75" height="75">
+                <img  src="{% static 'goods/'|add:goods.picname %}" style="display: inline;" width="75" height="75">
               </a>
             </li>
             <li role="presentation">
               <a href="#list-p3" aria-controls="list-p3" role="tab" data-toggle="tab">
-                <img  src="/static/goods/{{goods.picname}}" style="display: inline;" width="75" height="75">
+                <img  src="{% static 'goods/'|add:goods.picname %}" style="display: inline;" width="75" height="75">
               </a>
             </li>
           </ul>

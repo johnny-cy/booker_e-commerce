@@ -118,7 +118,7 @@
 	                <div class="tab-content">
 						<div role="tabpanel" class="tab-pane active mod-pic" id="list-p1">
 							<a href="{% url 'detail' goods.id %}">
-								<img class="lazy j-modProduct" src="/static/goods/{{goods.picname}}" width="220" height="220">
+								<img class="lazy j-modProduct" src="{% static 'goods/'|add:goods.picname  %}" width="220" height="220">
 							</a>
 						</div>
 					</div>
@@ -128,17 +128,17 @@
 						<ul class="nav nav-tabs  " role="tablist">
 							<li role="presentation" class="active">
 								<a href="#list-p1" aria-controls="list-p1" role="tab" data-toggle="tab">
-									<img class="lazy"  src="/static/goods/m_{{goods.picname}}" style="display: inline;" width="40" height="40">
+									<img class="lazy"  src="{% static 'goods/m_'|add:goods.picname %}" style="display: inline;" width="40" height="40">
 								</a>
 							</li>
 							<li role="presentation">
 								<a href="#list-p2" aria-controls="list-p2" role="tab" data-toggle="tab">
-									<img class="lazy"  src="/static/goods/m_{{goods.picname}}" style="display: inline;" width="40" height="40">
+									<img class="lazy"  src="{% static 'goods/m_'|add:goods.picname %}" style="display: inline;" width="40" height="40">
 								</a>
 							</li>
 							<li role="presentation">
 								<a href="#list-p3" aria-controls="list-p3" role="tab" data-toggle="tab">
-									<img class="lazy"  src="/static/goods/m_{{goods.picname}}" style="display: inline;" width="40" height="40">
+									<img class="lazy"  src="{% static 'goods/m_'|add:goods.picname %}" style="display: inline;" width="40" height="40">
 								</a>
 							</li>
 						</ul>
