@@ -20,28 +20,6 @@
 
     <table class="table table-bordered table-striped">
         <thead>
-            <div class="pagination">
-                <ul>
-                    {% if page_list.has_previous %}
-                    <li ><a href="?page={{ page_list.previous_page_number }}&keywords={{keywords}}&sex={{sex}}">&lt;</a></li>
-                    {% else %}
-                    <li ><a  href="?page=1&keywords={{keywords}}&sex={{sex}}">&laquo;</a></li>
-                    {% endif %}
-
-                    {% for num in page_list.paginator.page_range %}
-                    <li {% if num == page_list.number %}class="active"{% endif %}>
-                        <a href="?page={{ num }}&keywords={{keywords}}&sex={{sex}}">{{ num }}</a>
-                    </li>
-                    {% endfor %}
-
-
-                    {% if page_list.has_next %}
-                    <li><a href="?page={{ page_list.next_page_number }}&keywords={{keywords}}&sex={{sex}}">&gt;</a></li>
-                    {% else %}
-                    <li ><a href="?page={{ page_list.paginator.num_pages }}&keywords={{keywords}}&sex={{sex}}">&raquo;</a></li>
-                    {% endif %}
-                </ul>
-            </div>
             <tr>
                 <th>帳號</th>
                 <th>真實姓名</th>
