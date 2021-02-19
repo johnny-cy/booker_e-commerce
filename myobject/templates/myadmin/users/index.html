@@ -2,7 +2,7 @@
 
 {% block main %}                
     <h4>
-        会员信息管理
+        會員信息管理
     </h4>
     <div class="control-group">
         <form method="GET" action="" enctype="multipart/form-data">
@@ -43,12 +43,12 @@
                 </ul>
             </div>
             <tr>
-                <th>账号</th>
-                <th>真实姓名</th>
-                <th>性别</th>
-                <th>邮箱</th>
-                <th>注册时间</th>
-                <th>状态</th>
+                <th>帳號</th>
+                <th>真實姓名</th>
+                <th>性別</th>
+                <th>郵箱</th>
+                <th>註冊時間</th>
+                <th>狀態</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -62,8 +62,8 @@
                 <td>{{ vo.addtime|date:'Y-m-d H:i:s' }}</td>
                 <td>{{ vo.state }}</td>
                 <td>
-                    <a href="{% url 'myadmin_users_del' vo.id %}" class="view-link">删除</a>
-                    <a href="{% url 'myadmin_users_edit' vo.id %}" class="view-link">编辑</a>
+                    <a href="{% url 'myadmin_users_del' vo.id %}" class="view-link">刪除</a>
+                    <a href="{% url 'myadmin_users_edit' vo.id %}" class="view-link">編輯</a>
                     <a href="{% url 'myadmin_users_reset_pwd' vo.id %}" class="view-link">重置密碼</a>
 
                 </td>
@@ -71,26 +71,4 @@
             {% endfor %}
         </tbody>
     </table>                
-    <!-- <div class="pagination">
-        <ul>
-            <li class="disabled">
-                <a href="#">&laquo;</a>
-            </li>
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">&raquo;</a>
-            </li>
-        </ul>
-    </div>
-{% endblock %}
+   

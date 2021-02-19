@@ -4,15 +4,15 @@
 {% block main %}
               
     <h4>
-        商品类别信息管理
+        商品類別信息管理
     </h4>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID号</th>
-                <th>类别名称</th>
-                <th>父类别id</th>
-                <th>路径</th>
+                <th>ID號</th>
+                <th>類別名稱</th>
+                <th>父類別ID</th>
+                <th>路徑</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -24,9 +24,9 @@
                 <td>{{ vo.pid }}</td>
                 <td>{{ vo.path }}</td>
                 <td width="30%">
-                    <a href="{% url 'myadmin_type_add' vo.id %}" class="view-link">添加子类别</a>
-                    <a href="{% url 'myadmin_type_del' vo.id %}" class="view-link">删除</a>
-                    <a href="{% url 'myadmin_type_edit' vo.id %}" class="view-link">编辑</a>
+                    <a href="{% url 'myadmin_type_add' vo.id %}" class="view-link">添加子類別</a>
+                    <a href="{% url 'myadmin_type_del' vo.id %}" class="view-link">刪除</a>
+                    <a href="{% url 'myadmin_type_edit' vo.id %}" class="view-link">編輯</a>
                 </td>
             </tr>
             {% endfor %}

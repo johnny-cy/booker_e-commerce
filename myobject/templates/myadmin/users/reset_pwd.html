@@ -2,7 +2,7 @@
 
 {% block main %}
 
- <h3>会员信息管理</h3>
+ <h3>會員信息管理</h3>
 
  <hr>
  <form id="edit-profile" action="{% url 'myadmin_users_reset_pwd' user.id %}" class="form-horizontal" method="post">
@@ -10,25 +10,25 @@
         <fieldset>
             <legend>重置會員密碼信息</legend>
             <div class="control-group">
-                <label class="control-label" for="input01" >账号：</label>
+                <label class="control-label" for="input01" >帳號：</label>
                 <div class="controls">
                     <input type="text" name="username"  disabled="disabled" class="input-xlarge"  value="{{ user.username }}" />
                 </div>
             </div>
              <div class="control-group">
-                <label class="control-label" for="input01">真实姓名：</label>
+                <label class="control-label" for="input01">真實姓名：</label>
                 <div class="controls">
                     <input type="text" name="name" disabled="disabled" class="input-xlarge"  value ="{{ user.name }}"/>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">密码：</label>
+                <label class="control-label" for="input01">密碼：</label>
                 <div class="controls">
                     <input type="password" name="password" class="input-xlarge" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">重复密码：</label>
+                <label class="control-label" for="input01">重複密碼：</label>
                 <div class="controls">
                     <input type="password" name="repassword" class="input-xlarge" />
                 </div>

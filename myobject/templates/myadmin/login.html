@@ -2,7 +2,7 @@
 
 {% block main %}
 		<div id="login-page" class="container">
-			<h1>>商城后台管理登录</h1>
+			<h1>商城後台管理登入</h1>
 			<form id="login-form" class="well" action="{% url 'myadmin_dologin' %}" method="POST">
 				{% csrf_token %}
 				<input type="text" name="username"class="span2" placeholder="username" /><br />
@@ -14,8 +14,8 @@
 				<input type='text' name='code' class='span1' style='width:30;'>
 				<img src="{% url 'myadmin_verify' %}" onclick="this.src='{% url 'myadmin_verify' %}?sn='+Math.random()">
 				<!-- 驗證碼snippets -->
-				<button type="submit" class="btn btn-primary">Sign in</button>
-				<button type="submit" class="btn">Forgot Password</button>
+				<button type="submit" class="btn btn-primary">登入</button>
+				<button type="submit" class="btn">忘記密碼</button>
 			</form>	
 		<span style="color:red">{{ info }}</span>
 		</div>

@@ -2,20 +2,20 @@
 
 {% block main %}                
     <h3>
-        会员信息管理
+        會員信息管理
     </h3>
     <form id="edit-profile" action="{% url 'myadmin_users_update' user.id %}" class="form-horizontal" method="post">
         {% csrf_token %}
         <fieldset>
-            <legend>编辑会员信息</legend>
+            <legend>編輯會員信息</legend>
             <div class="control-group">
-                <label class="control-label" for="input01">账号：</label>
+                <label class="control-label" for="input01">帳號：</label>
                 <div class="controls">
                     {{ user.username }}
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">真实姓名：</label>
+                <label class="control-label" for="input01">真實姓名：</label>
                 <div class="controls">
                     <input type="text" name="name" class="input-xlarge" id="input01" value="{{ user.name }}" />
                 </div>
@@ -36,32 +36,32 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">邮编：</label>
+                <label class="control-label" for="input01">郵編：</label>
                 <div class="controls">
                     <input type="text" name="code" class="input-xlarge" id="input01" value="{{ user.code }}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">电话：</label>
+                <label class="control-label" for="input01">電話：</label>
                 <div class="controls">
                     <input type="text" name="phone" class="input-xlarge" id="input01" value="{{ user.phone }}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">email邮箱：</label>
+                <label class="control-label" for="input01">email郵箱：</label>
                 <div class="controls">
                     <input type="text" name="email" class="input-xlarge" id="input01" value="{{ user.email }}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="input01">状态：</label>
+                <label class="control-label" for="input01">狀態：</label>
                 <div class="controls">
                     <input type="radio" name="state" class="input-xlarge" id="input01" value="0" 
-                    {% if user.state == 0 %}checked{% endif %} /> 管理员 
+                    {% if user.state == 0 %}checked{% endif %} /> 管理員
                     <input type="radio" name="state" class="input-xlarge" id="input01" value="1" 
-                    {% if user.state == 1 %}checked{% endif %} /> 启用会员
+                    {% if user.state == 1 %}checked{% endif %} /> 啟用會員
                     <input type="radio" name="state" class="input-xlarge" id="input01" value="2" 
-                    {% if user.state == 2 %}checked{% endif %} /> 禁用用户
+                    {% if user.state == 2 %}checked{% endif %} /> 禁用用戶
                 </div>
             </div>                        
             <div class="form-actions">

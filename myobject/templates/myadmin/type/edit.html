@@ -2,14 +2,14 @@
 
 {% block main %}                
     <h3>
-        商品类别信息管理
+        商品類別信息管理
     </h3>
     <form id="edit-profile" action="{% url 'myadmin_type_update' type.id %}" class="form-horizontal" method="post">
         {% csrf_token %}
         <fieldset>
-            <legend>编辑商品类别信息</legend>
+            <legend>編輯商品類別信息</legend>
             <div class="control-group">
-                <label class="control-label" for="input01">类别名称：</label>
+                <label class="control-label" for="input01">類別名稱：</label>
                 <div class="controls">
                     <input type="text" name="name" class="input-xlarge" id="input01" value="{{ type.name }}" />
                 </div>

@@ -30,7 +30,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>id号</th>
+                <th>id號</th>
                 <th>商品名稱</th>
                 <th>商品類別</th>
                 <th>圖片</th>
@@ -46,7 +46,7 @@
                 <td>{{ vo.id }}</td>
                 <td>{{ vo.goods }}</td>
                 <td>{{ vo.typename }}</td>
-                <td><img src="/static/goods/s_{{ vo.picname }}" width="60"/></td>
+                <td><img src="{% static 'goods/s_'|add:vo.picname %}" width="60"/></td>
                 <td>{{ vo.price }}</td>
                 <td>{{ vo.clicknum }}</td>
                 <td>
