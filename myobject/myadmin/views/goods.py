@@ -239,6 +239,7 @@ def update(request,gid):
         ob = Goods.objects.get(id=gid)
         ob.goods = request.POST['goods']
         ob.typeid = request.POST['typeid']
+        print('before ')
         ob.publish_date = request.POST['publish_date']
         print("ob.publish_date: ", ob.publish_date)
         ob.price = request.POST['price']
