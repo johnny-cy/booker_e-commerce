@@ -28,6 +28,7 @@ def index(request):
 			page = request.GET.get('page', 0)
 			page_list = p.get_page(page)
 		except Exception as e:
+			print("err occured.")
 			print(e)
 		return render(request,"myadmin/users/index.html", {'page_list':page_list,"keywords":keywords,"sex":sex})
 
