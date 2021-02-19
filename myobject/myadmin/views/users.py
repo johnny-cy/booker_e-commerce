@@ -21,16 +21,16 @@ def index(request):
 		# 以上在objects.filter()雖然是QuerySet, 但它是Manager ,
 	users = users.all()	
 	print("users: ", users)
-	p = Paginator(users,5)
-	page = request.GET.get('page')
-	page_list = p.get_page(page)
+	# p = Paginator(users,5)
+	# page = request.GET.get('page')
+	# page_list = p.get_page(page)
 	print("page_list: ", page_list)
 	context = {}
-	context['page_list'] = page_list
+	# context['page_list'] = page_list
 	context['keywords'] = keywords
 	context['sex'] = sex
 	context['users'] = users
-	return render(request, "myadmin/users/index.html")
+	return render(request, "myadmin/users/index2.html", context)
 
 # 打開添加會員表單
 def add(request):
