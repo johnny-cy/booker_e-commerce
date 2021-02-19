@@ -13,7 +13,7 @@ def index(request):
 		users = Users.objects
 		keywords = request.GET.get('keywords', '')
 		sex = request.GET.get('sex')
-		print("sex": sex)
+		print("sex:", sex)
 		if keywords :
 			keywords = keywords.split(" ") # split後若有空格，則會變成list類型，可多個一併查詢
 			
