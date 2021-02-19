@@ -6,7 +6,7 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  	<title>BOOKER </title>
+  	<title>E-BOOKER </title>
       <meta name="description" content="Booker, an online book shop.">
       <meta name="Keywords" content="Booker">
       <link href="{% static 'web/img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
@@ -29,17 +29,35 @@
     {% endblock%}
     <script type="text/javascript" src="{% static 'web/js/rem.js' %}"></script>
     <script type="text/javascript" src="{% static 'web/js/topNav2.js' %}"></script>
-    
+    <style>
+      
+      body {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        padding-top: 160px;
+      }
+      .layout-header .layout-header-nav .layout-header-nav-link {
+        display: block;
+        color: #333;
+        height: 50px;
+        line-height: 50px;
+        transition: color .2s linear;
+        background-color: #fff;
+      }
+    </style>
 </head>
 <body>
   <!-- 导航 --> 
   <div class="layout-header" id="scroll-wrap">
     <nav class="navbar navbar-default navbar-fixed-top header hidden-xs hidden-sm">
       <div class="container clearfix">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background:white;">
           <div class="layout-header-logo navbar-left">
               <a target="_self" href="{% url 'index' %}" class="layout-header-logo-link" alt="BOOKER">
-                <H3>BOOKER</H3>
+                <H3>E-BOOKER</H3>
               </a>
           </div>
           <ul class="nav navbar-nav navbar-right layout-header-service clearfix">
@@ -54,20 +72,20 @@
                   <ul class="layout-user-downmenu-list layout-user-downmenu-show">
                     {% if request.session.vipuser %}
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'myinfo' %}?username={{request.session.vipuser.username}}" class="layout-user-downmenu-link " data-mtype="wmz_public_grzx_myorder">个人中心</a>
+                        <a href="{% url 'myinfo' %}?username={{request.session.vipuser.username}}" class="layout-user-downmenu-link " data-mtype="wmz_public_grzx_myorder">個人中心</a>
                       </li>
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'vip_orders' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
+                        <a href="{% url 'vip_orders' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的訂單</a>
                       </li>
                       <li class="layout-user-downmenu-item">
                         <a href="{% url 'logout' %}" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_mformy">退出</a>
                       </li>
                     {% else %}
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'login' %}" class="layout-user-downmenu-link">立即登录</a>
+                        <a href="{% url 'login' %}" class="layout-user-downmenu-link">立即登錄</a>
                       </li>
                       <li class="layout-user-downmenu-item">
-                        <a href="{% url 'register' %}" target="_blank" class="layout-user-downmenu-link" >立即注册</a>
+                        <a href="{% url 'register' %}" target="_blank" class="layout-user-downmenu-link" >立即註冊</a>
                       </li>
                     {% endif %}
                   </ul>
@@ -84,16 +102,16 @@
                 </a>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right layout-header-nav clearfix">
+          <ul class="nav navbar-nav navbar-right layout-header-nav clearfix" style="background:white;" >
             <li class="layout-header-nav-item">
-                <a href="{% url 'index' %}" class="layout-header-nav-link">商城首頁</a>
+                <a href="{% url 'index' %}" class="layout-header-nav-link" >商城首頁</a>
               </li>
               <li class="layout-header-nav-item">
-                <a href="{% url 'lists' %}" class="layout-header-nav-link">全部商品</a>
+                <a href="{% url 'lists' %}" class="layout-header-nav-link" >全部商品</a>
               </li>
            {% for type in typelist %}
               <li class="layout-header-nav-item">
-                <a href="{% url 'lists' %}?tid={{type.id}}" class="layout-header-nav-link">{{type.name}}</a>
+                <a href="{% url 'lists' %}?tid={{type.id}}" class="layout-header-nav-link" >{{type.name}}</a>
               </li>
             {% endfor %}   
 
@@ -183,7 +201,7 @@
       <header id="header" class="header">
         <div class="logo">
           <a href="{% url 'index' %}">
-              <H3>BOOKER</H3>
+              <H3>E-BOOKER</H3>
           </a>
         </div>
 
@@ -243,28 +261,28 @@
         <div class="layout-footer-bottom clearfix">
             <ul class="layout-footer-interlock clearfix">
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link">了解布殼</p>
+                    <p class="layout-footer-interlock-link">了解E-booker</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link" >加入我们</p>
+                    <p class="layout-footer-interlock-link" >加入我們</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link" >联系我们</p>
+                    <p class="layout-footer-interlock-link" >聯系我們</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link">布殼社区</p>
+                    <p class="layout-footer-interlock-link">布殼社區</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <p class="layout-footer-interlock-link">天猫旗舰店</p>
+                    <p class="layout-footer-interlock-link">天貓旗艦店</p>
                 </li>
                 <li class="layout-footer-interlock-item">
-                    <a href="{% url 'vip_feedback' %}"class="layout-footer-interlock-link" >问题反馈</a>
+                    <a href="{% url 'vip_feedback' %}"class="layout-footer-interlock-link" >問題反饋</a>
                 </li>
                 
             </ul>
             <div class="layout-footer-copyright clearfix">
                     <span class="layout-footer-copyright-left">
-                          <a class="layout-footer-copyright-link copyright-text">&copy;2019 Booker Co., Ltd. All rights reserved.</a>
+                          <a class="layout-footer-copyright-link copyright-text">&copy;2021 E-Booker Co., Ltd. All rights reserved.</a>
                           <!-- <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">粤ICP备13003602号-2</a>
                           <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">合字B2-20170010</a>
                           <a class="layout-footer-copyright-link" hidefocus="true" href="#" target="_blank">营业执照</a>

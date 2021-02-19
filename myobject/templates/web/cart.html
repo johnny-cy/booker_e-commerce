@@ -15,14 +15,14 @@
           <tr>
             <td class="cart-col-select col-md-3 col-xs-3 col-sm-3">
               <div class="cart-select-all JSelectAll">
-                <div class="mz-checkbox"></div>
-                <span class="cart-select-title">全选</span>
+                <!-- <div class="mz-checkbox"></div>
+                <span class="cart-select-title">全选</span> -->
               </div>
             </td>
-            <td class="cart-col-name col-md-3 hidden-xs hidden-sm">商11品</td>
-            <td class="cart-col-price col-md-2 hidden-xs hidden-sm">单价(元)</td>
-            <td class="cart-col-number col-md-2 hidden-xs hidden-sm">数量</td>
-            <td class="cart-col-total col-md-1 hidden-xs hidden-sm">小计(元)</td>
+            <td class="cart-col-name col-md-3 hidden-xs hidden-sm">商品</td>
+            <td class="cart-col-price col-md-2 hidden-xs hidden-sm">單價(元)</td>
+            <td class="cart-col-number col-md-2 hidden-xs hidden-sm">數量</td>
+            <td class="cart-col-total col-md-1 hidden-xs hidden-sm">小計(元)</td>
             <td class="cart-col-ctrl col-md-1 hidden-xs hidden-sm">操作</td>
           </tr>
         </tbody>
@@ -96,9 +96,9 @@
     <div class="cart-footer" id="cartFooter">
       <div class="container">
          <div class="cart-footer-left col-md-6 col-xs-4 col-sm-4">
-           <div class="cart-select-all JSelectAll" data-mdesc="全选按钮" data-mtype="store_cart_all">
+           <div class="cart-select-all JSelectAll" data-mdesc="全選按鈕" data-mtype="store_cart_all">
             <div class="mz-checkbox"></div>
-            <span class="cart-select-title">全选</span>
+            <span class="cart-select-title">全選</span>
            </div>
            <!-- <span class="cart-remove-selected" id="removeSelected">删除选中的商品</span> -->
            <span class="cart-footer-count">
@@ -106,16 +106,16 @@
             <span class="cart-footer-num" id="totalCount"></span>
             件商品
            </span>
-           <div class="mz-btn btn-danger" onclick="window.location='{% url 'cart_clear' %}'" id="cartSubmit">清空购物车</div>
+           <div class="mz-btn btn-danger" onclick="window.location='{% url 'cart_clear' %}'" id="cartSubmit">清空購物車</div>
         </div>
         <div class="cart-footer-right col-md-5 col-md-offset-1 col-sm-offset-2 col-xs-8 col-sm-6">
           <span class="cart-footer-sum">
-            <span class="cart-footer-text">已优惠</span>
+            <span class="cart-footer-text">已優惠</span>
             <span class="cart-footer-num red" id="totalDiscount">0.00</span>
-            <span class="cart-footer-text">元， 合计(不含运费)：</span>
+            <span class="cart-footer-text">元， 合計(不含運費)：</span>
             <span class="cart-footer-total" id="totalPrice">0.0</span>
           </span>
-          <div onclick="window.location='/orders/add?ids='+loadTotal().join(',')" class="mz-btn btn-success" id="cartSubmit">去结算</div>
+          <div onclick="window.location='/orders/add?ids='+loadTotal().join(',')" class="mz-btn btn-success" id="cartSubmit">去結算</div>
         </div>
       </div>
     </div><!-- 结算详情 E-->

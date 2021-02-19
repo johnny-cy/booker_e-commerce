@@ -15,8 +15,14 @@
       <!-- 面包屑 导航 -->
       <div class="ml-nav hidden-xs hidden-sm">
             <ol class="breadcrumb">
-              <li><a href="./index.html">首页</a></li>
-              <li><a href="#">全部商品</a></li>
+              <li><a href="{% url 'index' %}">首页</a></li>
+              <li><a href="{% url 'lists' %}">全部商品</a></li>
+              {% if t_name_pprev %}
+              <li><a href="{% url 'lists' %}?tid={{t_name_ppid}}">{{t_name_pprev}}</a></li>
+              {% endif %}
+              {% if t_name_prev %}
+              <li><a href="{% url 'lists' %}?tid={{t_name_pid}}">{{t_name_prev}}</a></li>
+              {% endif %}
               {% if t_name %}
               <li><a href="#">{{t_name}}</a></li>
               {% endif %}
@@ -103,9 +109,9 @@
           	<div class="col-md-3 col-sm-6 col-xs-6">
            		<div class="gl-item">
             		<div class="compare-btn-list" >
-                 		<i class="iconfont  icon-duibi compare-duibi"></i>
-                  		<span class="hidden-xs hidden-sm">对比</span>
-              		</div>
+                  <i class="iconfont  icon-duibi compare-duibi"></i>
+                  <span class="hidden-xs hidden-sm">对比</span>
+                </div>
               	<div class="gl-item-wrap">
                 <!-- Tab panes -->
                
@@ -153,25 +159,26 @@
           </div>
           
           {% endfor %}
-          <!-- 分頁功能 -->
-          <div class="pagination">
-            <span class="step-links">
-                {% if goodslist.has_previous %}
-                    <a href="?{{q_tid}}page=1">起始頁</a>
-                    <a href="?{{q_tid}}page={{ goodslist.previous_page_number }}">上一頁</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ goodslist.number }} of {{ goodslist.paginator.num_pages }}.
-                </span>
-
-                {% if goodslist.has_next %}
-                    <a href="?{{q_tid}}page={{ goodslist.next_page_number }}">下一頁</a>
-                    <a href="?{{q_tid}}page={{ goodslist.paginator.num_pages }}">最末頁</a>
-                {% endif %}
-            </span>
+          
         </div>
-      </div>
+        <!-- 分頁功能 -->
+        <div class="pagination">
+          <span class="step-links">
+              {% if goodslist.has_previous %}
+                  <a href="?{{q_tid}}page=1">起始頁</a>
+                  <a href="?{{q_tid}}page={{ goodslist.previous_page_number }}">上一頁</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ goodslist.number }} of {{ goodslist.paginator.num_pages }}.
+              </span>
+
+              {% if goodslist.has_next %}
+                  <a href="?{{q_tid}}page={{ goodslist.next_page_number }}">下一頁</a>
+                  <a href="?{{q_tid}}page={{ goodslist.paginator.num_pages }}">最末頁</a>
+              {% endif %}
+          </span>
+        </div>
     </div>
        
       <!-- 商品列表 -->

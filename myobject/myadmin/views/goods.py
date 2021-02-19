@@ -6,9 +6,10 @@ from common.models import Types,Goods
 from PIL import Image
 from datetime import datetime
 from django.utils import timezone
-
+import json
 import time,json,os
 import html
+import re
 # from django.forms import forms
 # from DjangoUeditor.forms import UEditorField
 
@@ -93,9 +94,23 @@ def index(request,pIndex):
 def add(request):
     # 获取商品的类别信息
     
-    list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
-    context = {"typelist":list}
-
+    data = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has').values() # dict inside
+    # test = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has').values_list() # only value list inside
+    list_first_level = []
+    list_second_level = []
+    list_third_level = []
+    for d in data:
+        if len(re.findall(",", d['path'])) == 1:
+            list_first_level.append(d)
+        elif len(re.findall(",", d['path'])) == 2:
+            list_second_level.append(d)
+        elif len(re.findall(",", d['path'])) == 3:
+            list_third_level.append(d)
+    context = {
+               "typeslist_first": json.dumps(list_first_level),
+               "typeslist_second": json.dumps(list_second_level),
+               "typeslist_third": json.dumps(list_third_level),
+              }
     return render(request,'myadmin/goods/add.html',context)
 
 # 执行商品类别信息添加 

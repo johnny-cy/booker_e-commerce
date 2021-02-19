@@ -13,20 +13,27 @@
         <fieldset>
             <legend>添加商品信息</legend>
             <div class="control-group">
-                <label class="control-label" for="input01">商品类别：</label>
+                <label class="control-label" for="input01">商品类别（第一層級）：</label>
                 <div class="controls">
-                    <select name="typeid">
-                        {% for vo in typelist %}
-                            <option 
-                                {% if vo.pid == 0 %}
-                                    disabled
-                                {% endif %} 
-                                 value="{{ vo.id }}">{{ vo.name }}</option>
-                            
-
-                        {% endfor %}
+                    <select id="first_level" name="typeid">
+                        
                     </select>
-
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input01">商品类别（第二層級）：</label>
+                <div class="controls">
+                    <select id="second_level" name="typeid">
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input01">商品类别（第三層級）：</label>
+                <div class="controls">
+                    <select id="third_level" name="typeid">
+                        
+                    </select>
                 </div>
             </div>
              
@@ -87,5 +94,44 @@
             </div>
         </fieldset>
     </form>
+    <script>
+        var first = JSON.parse("{{ typeslist_first|escapejs }}");
+        var second = JSON.parse("{{ typeslist_second|escapejs }}");
+        var third = JSON.parse("{{ typeslist_third|escapejs }}");
+        $("#first_level").empty()
+        for (var i=0; i < first.length; i++){
+                $('#first_level').append('\
+                <option value= '+ first[i]['id'] +'>'+ first[i]['name'] +'</option>');
+            };
+        $('#first_level').change(function(){
+            $('#second_level').empty()
+            $("#third_level").empty()
+            var first_pid = $("#first_level option:selected").val()
+            for (var i=0; i< second.length; i++){
+                if (second[i]['pid']==first_pid){
+                    $('#second_level').append('\
+                    <option value= '+ second[i]['id'] +'>'+ second[i]['name'] +'</option>');
+                };
+            };
+            var second_pid = $('#second_level option:selected').val()
+            for (var i=0; i < third.length; i++){
+                if (third[i]['pid']==second_pid){
+                    $("#third_level").append('\
+                    <option value='+third[i]['id'] +'>'+third[i]['name'] +'</option>');
+                };
+            };
+        });
+        $('#second_level').change(function(){
+            var second_pid = $('#second_level option:selected').val()
+            console.log("second",second_pid)
+            $("#third_level").empty()
+            for (var i=0; i < third.length; i++){
+                if (third[i]['pid']==second_pid){
+                    $("#third_level").append('\
+                    <option value='+third[i]['id'] +'>'+third[i]['name'] +'</option>');
+                };
+            };
+        });
+    </script>
    
 {% endblock %}

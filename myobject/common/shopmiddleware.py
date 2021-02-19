@@ -41,7 +41,8 @@ class FeedbackMiddleware(object):
 		if path in urllist:
 			# 判断当前用户是否有登录，若沒則跳轉登入頁面 
 			if 'vipuser' not in request.session:
-				return redirect(reverse('login',kwargs={'path':path})) # 順便回傳當前的request.path，登入之後方便直接回來
+				print("vipuser not in session..redirect to login")
+				return redirect(reverse('login')) # 順便回傳當前的request.path，登入之後方便直接回來
 		
 		response = self.get_response(request)
 		

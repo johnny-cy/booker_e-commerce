@@ -5,7 +5,10 @@ from common.models import Users, Types, Goods
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db import connections
-
+# cache
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends import locmem
+from django.core.cache import cache
 
 
 # 前台首页
@@ -17,10 +20,12 @@ def custom_sql(sql):
         data = cursor.fetchall() 
         return data
 
+# @cache_page(60*60*72)
 def index(request):
     # ---熱門點擊率區塊---
     # 讀取類別表
-    typelist = Types.objects.filter(pid=0)  # 只讀取基類pid=0 # pylint: disable=maybe-no-member
+    type_obj = Types.objects
+    typelist = type_obj.filter(pid=0)  # 只讀取基類pid=0 # pylint: disable=maybe-no-member
     # 獲取商品點擊數前五名的商品
     goods_obj = Goods.objects
     goods_by_click = goods_obj.all().order_by('clicknum')[:5] # pylint: disable=maybe-no-member
@@ -44,10 +49,31 @@ def index(request):
     # temp = custom_sql("SELECT DISTINCT typeid FROM goods;")
     # print(temp)
     # typelist_3 = Types.objects.filter(id__in=temp) # pylint: disable=maybe-no-member
-    typelist_3 = Types.objects.exclude(pid=0)
+    # typelist_3 = Types.objects.exclude(pid=0)
     # [print(i.name) for i in typelist_3]
     goodslist = Goods.objects.raw("SELECT a.* FROM goods a WHERE 5>=(SELECT COUNT(*) FROM goods b WHERE a.typeid=b.typeid AND a.addtime>=b.addtime);") # pylint: disable=maybe-no-member
-
+    goodslist = Goods.objects.filter(id__in=[ i.id for i in goodslist ]).values('id', 'typeid', 'goods', 'price', 'picname') # re query ids from raw to remake it as a queryset
+    
+    
+    typelist_3 = type_obj.filter(pid=0).values('id','name')
+        
+    # all_goods = list(goods_obj.all().values('id', 'typeid', 'goods', 'price', 'picname'))
+    count_dict = {}
+    for g in goodslist:
+        pid = type_obj.get(id=g['typeid']).pid
+        ppid = type_obj.get(id=pid).pid
+        # print("ppid: ", ppid)
+        if f"id_{ppid}" in count_dict.keys():
+            # append
+            if count_dict[f"id_{ppid}"] < 4:
+                count_dict[f"id_{ppid}"] += 1
+                g.update({"ppid": ppid})
+            else:
+                g.update({"ppid": 0})
+        else:
+            count_dict.update({f"id_{ppid}": 0})
+            g.update({"ppid": ppid})
+    
     context = {'typelist': typelist,
                'goods_by_click': goods_by_click,
                'goodslist': goodslist,
@@ -57,38 +83,74 @@ def index(request):
 
 
 def lists(request, pIndex=1):
+    t_obj = Types.objects
+    tlv1 = Types.objects.filter(pid=0).values('id','path') # 第一層類別id, path  # [{'id': 162, 'path': '0'}, ...]
+    tlv2 = Types.objects.filter(path__iregex='^0,[0-9]+,$').values('id','path') # 第二層類別id, path # [{'id': 162, 'path': '0,1,,'}, ...]
+    tlv3 = Types.objects.filter(path__iregex='^0,[0-9]+,[0-9]+,$').values('id', 'path') # 第三層類別id, path # [{'id': 162, 'path': '0,1,2,'}, ...]
+
+    tlv1_ids   = [ i['id'] for i in tlv1] # tlv1_ids length:  19
+    tlv2_ids   = [ i['id'] for i in tlv2] # tlv2_ids length:  141
+    tlv3_ids   = [ i['id'] for i in tlv3] # tlv3_ids length:  233
+    tlv1_paths = [ i['path'] for i in tlv1]
+    tlv2_paths = [ i['path'] for i in tlv2]
+    tlv3_paths = [ i['path'] for i in tlv3]
+    # 找出tid底下的goods
     context = {}
     # 獲取前端問號變數回傳的值
     tid = int(request.GET.get('tid', 0))
     orderby = request.GET.get('orderby', None)
     # 查詢根類別項目, 分類瀏覽使用
-    typelist = Types.objects.filter(pid=0) 
+    typelist = Types.objects.filter(pid=0) # 顯示第一層類別
     # 做一個比對的字典，在類別表當中，每一個大類底下對映著那些子類，而當大類的tid傳入的時候，就把它底下的子類群列表，再拿商品表當中filter(typeid__in=子類群) 篩選出來後輸出到前端
+    
     # 製作大類id列表
     typelist_tmp_parent = []
     [typelist_tmp_parent.append(i.id) for i in typelist]
-    print(typelist_tmp_parent) # [25]
+    # print(typelist_tmp_parent) # [25]
     typelist_tmp_child = []
     
-    typelist_2 = Types.objects.exclude(pid=0) # 所有商品
+    # typelist_2 = Types.objects.exclude(pid=0) # 所有商品
+    typelist_2 = Types.objects.filter(path=f"0,{tid},") # 顯示第二層類別
+    if not typelist_2:
+        typelist_2 = Types.objects.filter(pid=tid)
     [typelist_tmp_child.append(i.id) for i in typelist_2]
-    print(typelist_tmp_child) # [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+    # print(typelist_tmp_child) # [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
 
-    context['typelist_2']= typelist_2
+    context['typelist_2']= typelist_2 # type: Queryset # 第二層路徑符合的都顯示其類別
+    
     
     try:
-
-        if tid in typelist_tmp_child:
-            context['q_tid'] = 'tid='+str(tid)+'&'  # q_tid作為子類別商品查詢使用
-            context['goodslist'] = Goods.objects.filter(typeid=tid) # 單一id
-            context['t_name'] = Types.objects.only('name').filter(id=tid)[0].name
-        elif tid in typelist_tmp_parent:
-            context['q_tid'] = 'tid='+str(tid)+'&'  # q_tid作為子類別商品查詢使用
-            # 父類id求其子類，必須使用0,父id
-            tmp = "0,"+str(tid)+","
-            tmp2 = Types.objects.filter(path=tmp) 
-            context['goodslist'] = Goods.objects.filter(typeid__in=[i.id for i in tmp2]) # 多個id
+        if tid in tlv1_ids:
+            print("hit tlv1, return tlv2")
+            context['q_tid'] = f'tid={tid}&'
+            filtered_ids = t_obj.filter(path__iregex=f"^0,{tid},").values_list('id')
+            context['goodslist'] = Goods.objects.filter(typeid__in=filtered_ids)
+            # get breadcrum info
+            context['t_name'] = Types.objects.get(id=tid).name
+        elif tid in tlv2_ids:
+            print("hit tlv2, return tlv3")
+            context['q_tid'] = f'tid={tid}&'
+            filtered_ids = t_obj.filter(path__iregex=f"^0,[0-9]+,{tid},$").values_list('id')
+            context['goodslist'] = Goods.objects.filter(typeid__in=filtered_ids)
+            # get breadcrum info previous
+            t_name_pid = Types.objects.get(id=tid).pid
+            context['t_name_pid'] = t_name_pid
+            context['t_name_prev'] = Types.objects.get(id=t_name_pid).name
+            context['t_name'] = Types.objects.get(id=tid).name
+        elif tid in tlv3_ids:
+            print("hit tlv3, return lv3")
+            context['q_tid'] = f'tid={tid}&'
+            context['goodslist'] = Goods.objects.filter(typeid=tid)
+            # get breadcrum info previous and pprevious
+            t_name_pid = Types.objects.get(id=tid).pid
+            t_name_ppid = Types.objects.get(id=t_name_pid).pid
+            context['t_name_ppid'] = t_name_ppid
+            context['t_name_pid'] = t_name_pid
+            context['t_name_pprev'] = Types.objects.get(id=t_name_ppid).name
+            context['t_name_prev'] = Types.objects.get(id=t_name_pid).name
+            context['t_name'] = Types.objects.get(id=tid).name
         else:
+            print("tid neither in tlv1 nor tlv2!")
             context['goodslist'] = Goods.objects.all()
         if orderby:
             context['goodslist'] = context['goodslist'].order_by(orderby)
@@ -107,7 +169,7 @@ def lists(request, pIndex=1):
     except Exception as err:
         print(err)
         return HttpResponse("error...")
-
+    print(context.keys())
     return render(request, "web/list.html", context)
 
 
