@@ -49,6 +49,7 @@ class VIPPagesMiddleware(object):
 				print("it is varify, do not redirect.")
 				pass
 			elif 'adminuser' not in request.session:
+				print("adminuser not found")
 				return render(request,'myadmin/login.html')
 
 		# 	if 'adminuser' not in request.session:
