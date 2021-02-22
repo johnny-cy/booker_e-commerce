@@ -13,7 +13,7 @@
         <select name="typeid" class="span2">
             <option value="0">全部</option>
             {% for vo in typelist %}
-                <option value="{{ vo.id }}" {% if typeid == vo.id %}selected{% endif %}>{{vo.pname}}|--{{ vo.name }}</option>
+                <option value="{{ vo.id }}" {% if typeid == vo.id %}selected{% endif %}>{{vo.pname}}|--{{ vo.name }} </option>
             {% endfor %}
         </select>
         <label> &nbsp; 狀態：</label>
