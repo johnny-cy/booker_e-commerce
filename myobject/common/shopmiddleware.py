@@ -45,9 +45,9 @@ class VIPPagesMiddleware(object):
 			if 'vipuser' not in request.session:
 				print("vipuser not in session..redirect to login")
 				return redirect(reverse('login')) # 順便回傳當前的request.path，登入之後方便直接回來
-		elif re.match('^/booker/myadmin/', path):
-			if 'adminuser' not in request.session:
-				return redirect(reverse('myadmin_login'))
+		# elif re.match('^/booker/myadmin/', path):
+		# 	if 'adminuser' not in request.session:
+		# 		return redirect(reverse('myadmin_login'))
 		# if path in urllist:
 		# 	# 判断当前用户是否有登录，若沒則跳轉登入頁面 
 		# 	if 'vipuser' not in request.session:
