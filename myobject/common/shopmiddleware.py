@@ -34,7 +34,9 @@ class FeedbackMiddleware(object):
 	def __call__(self,request):
 		
 		# 定义网站前台登入時才可以訪問的路由url
-		urllist = ['/vip/feedback/']
+		urllist = ['/vip/feedback/', '/order/confirm/', '/order/add/']
+		for i in urllist:
+			"/booker"+i
 		# 获取当前请求路径
 		path = request.path
 		# 判断当前path是否在urllist中
