@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 	url(r'^myadmin/', include('myadmin.urls')), #网站后台路由
-	url(r'^', include('web.urls')),           #网站前台路由
+	# url(r'^', include('web.urls')),           #网站前台路由
     path('ueditor/',include("DjangoUeditor.urls")),
 
     url(r'^booker/myadmin/', include('myadmin.urls')), #网站后台路由
