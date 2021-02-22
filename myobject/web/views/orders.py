@@ -49,7 +49,7 @@ def insert(request):
     try:
         # 执行订单信息添加操作
         od = Orders()
-        print(request.session['vipuser'])
+        print(request.session)
         od.uid = request.session['vipuser']['id']
         print(request.session['vipuser'])
         od.linkman = request.POST.get('linkman')
