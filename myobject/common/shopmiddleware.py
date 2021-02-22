@@ -3,31 +3,31 @@ from django.shortcuts import redirect,reverse
 
 import re
 
-class MyadminPagesMiddleware(object):
-	def __init__(self,get_response):
-		self.get_response = get_response
-		# One-time configuration and initialization(一次性配置和初始化).
+# class MyadminPagesMiddleware(object):
+# 	def __init__(self,get_response):
+# 		self.get_response = get_response
+# 		# One-time configuration and initialization(一次性配置和初始化).
 
-	def __call__(self,request):
+# 	def __call__(self,request):
 		
-		# 定义网站后台不用登录也可访问的路由url
-		# urllist = ['/myadmin/login','/myadmin/dologin','/myadmin/logout','/myadmin/verify']
-		# 获取当前请求路径
-		path = request.path
-		print(path)
-		# 判断当前请求是否是访问网站后台,并且path不在urllist中
-		# if re.match("^/booker/myadmin/",path):
-		# 	# 判断当前用户是否没有登录
-		# 	if 'adminuser' not in request.session:
-		# 		return redirect(reverse('myadmin_login'))
-		# 	else:
-		# 		print(request.session['adminuser'])
+# 		# 定义网站后台不用登录也可访问的路由url
+# 		# urllist = ['/myadmin/login','/myadmin/dologin','/myadmin/logout','/myadmin/verify']
+# 		# 获取当前请求路径
+# 		path = request.path
+# 		print(path)
+# 		# 判断当前请求是否是访问网站后台,并且path不在urllist中
+# 		# if re.match("^/booker/myadmin/",path):
+# 		# 	# 判断当前用户是否没有登录
+# 		# 	if 'adminuser' not in request.session:
+# 		# 		return redirect(reverse('myadmin_login'))
+# 		# 	else:
+# 		# 		print(request.session['adminuser'])
 		
-		response = self.get_response(request)
-		# Code to be executed for each request/response after
-		# the view is called.
+# 		response = self.get_response(request)
+# 		# Code to be executed for each request/response after
+# 		# the view is called.
 		
-		return response
+# 		return response
 		
 
 class VIPPagesMiddleware(object):
@@ -45,6 +45,9 @@ class VIPPagesMiddleware(object):
 			if 'vipuser' not in request.session:
 				print("vipuser not in session..redirect to login")
 				return redirect(reverse('login')) # 順便回傳當前的request.path，登入之後方便直接回來
+		else re.match('^/booker/myadmin/', path):
+			if 'adminuser' not in request.session:
+				return redirect(reverse('myadmin_login'))
 		# if path in urllist:
 		# 	# 判断当前用户是否有登录，若沒則跳轉登入頁面 
 		# 	if 'vipuser' not in request.session:
