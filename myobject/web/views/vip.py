@@ -122,12 +122,15 @@ def feedback(request):
 		
 		return render(request, "web/feedback.html")
 	elif request.method == 'POST':
+		print("get in post")
 		myajax_content = html.unescape(request.POST.get('content'))
 		message = MIMEMultipart()
 		message['From'] = Header(r"BOOKER網", "utf-8")
 		message['To'] = Header(r"", "utf-8")
 		message['Subject'] = Header(r"從網站內寄出的反饋意見，來自"+request.session['vipuser']['username'], "utf-8")
 		message.attach(MIMEText(myajax_content, 'html','utf-8')) 
+		print("before send_smtp_ssl....")
 		send_smtp_ssl(message.as_string())
 		context = {"info" : "謝謝您的反饋，我們將竭誠為您服務！"}
+		print("before render...")
 		return render(request,"web/info.html",context)
