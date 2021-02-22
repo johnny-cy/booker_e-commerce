@@ -181,8 +181,8 @@ def lists(request, pIndex=1):
 
 # 商品詳情內頁
 def detail(request, gid):
-    typelist = Types.objects.filter(pid=0) # pylint: disable=maybe-no-member
-    context = {'typelist': typelist}
+    # typelist = Types.objects.filter(pid=0) # pylint: disable=maybe-no-member
+    # context = {'typelist': typelist}
     goods = Goods.objects.get(id=gid) # pylint: disable=maybe-no-member
     goods.clicknum += 1  # 商品點擊數量增加
     goods.save()
