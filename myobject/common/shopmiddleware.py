@@ -1,6 +1,5 @@
 # 自定义中间件类
-from django.shortcuts import redirect,reverse
-
+from django.shortcuts import render,redirect,reverse
 import re
 
 # class MyadminPagesMiddleware(object):
