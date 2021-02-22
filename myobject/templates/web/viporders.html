@@ -61,23 +61,7 @@
                   </ul>
 				</div>
 				<div id="tableList" class="type-contain ui-load-container">
-					<div class="pagination">
-					    <span class="step-links">
-					        {% if orderslist.has_previous %}
-					            <a href="?page=1">&laquo; first</a>
-					            <a href="?page={{ orderslist.previous_page_number }}">上一頁</a>
-					        {% endif %}
-
-					        <span class="current">
-					            頁數 {{ orderslist.number }} / {{ orderslist.paginator.num_pages }}.
-					        </span>
-
-					        {% if orderslist.has_next %}
-					            <a href="?page={{ orderslist.next_page_number }}">下一頁</a>
-					            <a href="?page={{ orderslist.paginator.num_pages }}">最後一頁 &raquo;</a>
-					        {% endif %}
-					    </span>
-					</div>
+					
 					<!-- 每个订单信息 -->
 					{% for orders in orderslist %}
 					<div class="ui-load-content" style="margin-top: 20px">
@@ -155,7 +139,23 @@
 					</div>
 					{% endfor %}
 					<!-- 每个订单信息 end-->
-				
+					<div class="pagination">
+					    <span class="step-links">
+					        {% if orderslist.has_previous %}
+					            <a href="?page=1">&laquo; 第一頁</a>
+					            <a href="?page={{ orderslist.previous_page_number }}">上一頁</a>
+					        {% endif %}
+
+					        <span class="current">
+					            頁數 {{ orderslist.number }} / {{ orderslist.paginator.num_pages }}.
+					        </span>
+
+					        {% if orderslist.has_next %}
+					            <a href="?page={{ orderslist.next_page_number }}">下一頁</a>
+					            <a href="?page={{ orderslist.paginator.num_pages }}">最後一頁 &raquo;</a>
+					        {% endif %}
+					    </span>
+					</div>
 				</div>
 			</div>
 		</div>
