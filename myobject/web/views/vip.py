@@ -59,8 +59,9 @@ def viporders(request):
 		print(detaillist)
 		# 遍歷詳情，並放入商品模塊中的picname到詳情內
 		for g in detaillist:
-			print("g:", g)
-			g.picname = Goods.objects.only('picname').get(id=g.goodsid).picname
+			print("g:", g, g.goodsid)
+			
+			g.picname = Goods.objects.get(id=g.goodsid).picname
 			print("this is g.pickname = "+g.picname)
 		# 將新的詳情加入odlist當中，屬性名稱同為detaillist
 		od.detaillist = detaillist
