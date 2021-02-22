@@ -19,6 +19,8 @@ class MyadminPagesMiddleware(object):
 			# 判断当前用户是否没有登录
 			if 'adminuser' not in request.session:
 				return redirect(reverse('myadmin_login'))
+			else:
+				print(request.session['adminuser'])
 		
 		response = self.get_response(request)
 		# Code to be executed for each request/response after
