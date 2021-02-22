@@ -200,7 +200,7 @@ body{
 	font-weight: bolder
 }
 .cart-product .cart-product-price:before {
-	content: 'NTD'
+	content: '¥'
 }
 .cart-product .cart-product-number-adder {
 	position: relative
