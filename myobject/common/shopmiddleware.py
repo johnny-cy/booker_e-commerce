@@ -47,7 +47,7 @@ class VIPPagesMiddleware(object):
 		elif re.match('^/booker/myadmin/', path):
 			if re.match('^/booker/myadmin/varify$', path):
 				pass
-			elif 'adminuser' not in request.session::
+			elif 'adminuser' not in request.session:
 				return render(request,'myadmin/login.html')
 
 		# 	if 'adminuser' not in request.session:
