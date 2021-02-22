@@ -37,6 +37,7 @@ class VIPPagesMiddleware(object):
 		print('vippagesmiddleware')
 		# 定义网站前台登入時才可以訪問的路由url
 		urllist = ['/booker/vip/feedback/', '/booker/vip/orders/']
+		urllist_pass_myadmin = ['login','dologin','logout','verify']
 		# 获取当前请求路径
 		path = request.path
 		print(path)
@@ -46,9 +47,8 @@ class VIPPagesMiddleware(object):
 				print("vipuser not in session..redirect to login")
 				return redirect(reverse('login')) # 順便回傳當前的request.path，登入之後方便直接回來
 		elif re.match('^/booker/myadmin/', path):
-			if path == '/booker/myadmin/verify':
-				print("it is varify, do not redirect.")
-				pass
+			if any(i in path for i in urllist_pass_myadmin):
+				print(f"it is {i}, do not redirect.")
 			elif 'adminuser' not in request.session:
 				print("adminuser not found")
 				return render(request,'myadmin/login.html')
