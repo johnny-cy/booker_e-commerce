@@ -127,7 +127,7 @@
 									<div class="stateDiv">
 										   <div>
 										   	{% if orders.state == 0 %}
-							                    新訂單 <br/><br/><br/>
+							                    新訂單 <br/><br/>
 							                    【<a href="{% url 'vip_odstate' %}?oid={{orders.id}}&state=4">撤銷訂單</a>】
 							                {% elif orders.state == 1 %}
 							                    已發貨 <br/><br/>
