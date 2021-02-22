@@ -100,7 +100,7 @@
 											{% for detail in orders.detaillist %}
 											<div class="item b-t clearfix j-item j-iamMain" style="height:110px;">
 												<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' detail.goodsid %}" target="_blank">
-													<img src="/static/goods/{{detail.picname}}" style="width:75px;height:75px" class="f-fl"/>
+													<img src="{% static 'goods/'|add:detail.picname %}" style="width:75px;height:75px" class="f-fl"/>
 												</a>
 												<div class="describe f-fl col-xs-8 col-sm-8">
 													<div class="vertic clearfix">
