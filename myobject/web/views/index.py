@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.db import connections
 # cache
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page
 from django.core.cache.backends import locmem
 from django.core.cache import cache
 
@@ -51,29 +51,35 @@ def index(request):
     # typelist_3 = Types.objects.filter(id__in=temp) # pylint: disable=maybe-no-member
     # typelist_3 = Types.objects.exclude(pid=0)
     # [print(i.name) for i in typelist_3]
-    goodslist = Goods.objects.raw("SELECT a.* FROM goods a WHERE 5>=(SELECT COUNT(*) FROM goods b WHERE a.typeid=b.typeid AND a.addtime>=b.addtime);") # pylint: disable=maybe-no-member
-    goodslist = Goods.objects.filter(id__in=[ i.id for i in goodslist ]).values('id', 'typeid', 'goods', 'price', 'picname') # re query ids from raw to remake it as a queryset
-    
-    
     typelist_3 = type_obj.filter(pid=0).values('id','name')
-        
-    # all_goods = list(goods_obj.all().values('id', 'typeid', 'goods', 'price', 'picname'))
-    count_dict = {}
-    for g in goodslist:
-        pid = type_obj.get(id=g['typeid']).pid
-        ppid = type_obj.get(id=pid).pid
-        # print("ppid: ", ppid)
-        if f"id_{ppid}" in count_dict.keys():
-            # append
-            if count_dict[f"id_{ppid}"] < 4:
-                count_dict[f"id_{ppid}"] += 1
-                g.update({"ppid": ppid})
+
+    # cache goodslist start---
+    # get cache if exists
+    cache_data = cache.get("cache_data_of_index")
+    if cache_data:
+        goodslist = cache_data
+    else:
+        goodslist = Goods.objects.raw("SELECT a.* FROM goods a WHERE 5>=(SELECT COUNT(*) FROM goods b WHERE a.typeid=b.typeid AND a.addtime>=b.addtime);") # pylint: disable=maybe-no-member
+        goodslist = Goods.objects.filter(id__in=[ i.id for i in goodslist ]).values('id', 'typeid', 'goods', 'price', 'picname') # re query ids from raw to remake it as a queryset
+        count_dict = {}
+        for g in goodslist:
+            pid = type_obj.get(id=g['typeid']).pid
+            ppid = type_obj.get(id=pid).pid
+            # print("ppid: ", ppid)
+            if f"id_{ppid}" in count_dict.keys():
+                # append
+                if count_dict[f"id_{ppid}"] < 4:
+                    count_dict[f"id_{ppid}"] += 1
+                    g.update({"ppid": ppid})
+                else:
+                    g.update({"ppid": 0})
             else:
-                g.update({"ppid": 0})
-        else:
-            count_dict.update({f"id_{ppid}": 0})
-            g.update({"ppid": ppid})
-    
+                count_dict.update({f"id_{ppid}": 0})
+                g.update({"ppid": ppid})
+        # 再次將goodslist 存入cache供後續使用
+        cache.set("cache_data_of_index", goodslist, 60*60*24*7) # set cache for next use
+    # cache goodslist end---
+
     context = {'typelist': typelist,
                'goods_by_click': goods_by_click,
                'goodslist': goodslist,
@@ -275,3 +281,6 @@ def myinfo(request):
         else:
             context = {'info': " 密碼輸入錯誤!"}
         return render(request, "web/info.html", context)
+
+
+    
