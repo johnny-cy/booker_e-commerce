@@ -186,7 +186,7 @@ def detail(request, gid):
     goods = Goods.objects.get(id=gid) # pylint: disable=maybe-no-member
     goods.clicknum += 1  # 商品點擊數量增加
     goods.save()
-    context['goods'] = goods
+    context = {'goods': goods }
     return render(request, "web/detail.html", context)
 
 # 前台使用者登入
