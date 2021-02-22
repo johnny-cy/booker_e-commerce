@@ -10,7 +10,7 @@
         <h3 class="bg-primary">
             意見反饋
         </h3>
-        <form id="edit-profile" action="{% url 'vip_feedback' %}" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <form id="edit-profile" action="{% url 'vip_feedback' %}" class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="check_context()">
             {% csrf_token %}
             <fieldset class="bg-success pt-5">
                 
@@ -28,11 +28,15 @@
                     </script>
                 </div>                        
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">送出</button> <button type="reset" class="btn">重置</button>
+                    <button type="submit" class="btn btn-primary">送出</button> <button type="reset" class="btn" >重置</button>
                 </div>
             </fieldset>
         </form>
     </div>
     <br/>
-   
+    <script>
+    function check_context(){
+        console.log($(this))
+    };
+    </script>
 {% endblock %}
