@@ -1,37 +1,31 @@
-{% extends 'myadmin/base.html' %}
+{% extends 'myadmin/base.html' %} {% block main %}
 
-
-{% block main %}
-              
-    <h4>
-        商品類別信息管理
-    </h4>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID號</th>
-                <th>類別名稱</th>
-                <th>父類別ID</th>
-                <th>路徑</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for vo in typeslist %}
-            <tr>
-                <td>{{ vo.id }}</td>
-                <td>{{ vo.pname}}|-- {{ vo.name }}</td>
-                <td>{{ vo.pid }}</td>
-                <td>{{ vo.path }}</td>
-                <td width="30%">
-                    <a href="{% url 'myadmin_type_add' vo.id %}" class="view-link">添加子類別</a>
-                    <a href="{% url 'myadmin_type_del' vo.id %}" class="view-link">刪除</a>
-                    <a href="{% url 'myadmin_type_edit' vo.id %}" class="view-link">編輯</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>                
-    
+<h4>商品類別信息管理</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID號</th>
+            <th>類別名稱</th>
+            <th>父類別ID</th>
+            <th>路徑</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vo in typeslist %}
+        <tr>
+            <td>{{ vo.id }}</td>
+            <td>{{ vo.pname}}|-- {{ vo.name }}</td>
+            <td>{{ vo.pid }}</td>
+            <td>{{ vo.path }}</td>
+            <td width="30%">
+                <a href="{% url 'myadmin_type_add' vo.id %}" class="view-link">添加子類別</a>
+                <a href="{% url 'myadmin_type_del' vo.id %}" class="view-link">刪除</a>
+                <a href="{% url 'myadmin_type_edit' vo.id %}" class="view-link">編輯</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
