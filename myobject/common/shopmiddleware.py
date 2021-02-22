@@ -3,7 +3,7 @@ from django.shortcuts import redirect,reverse
 
 import re
 
-class ShopMiddleware(object):
+class MyadminPagesMiddleware(object):
 	def __init__(self,get_response):
 		self.get_response = get_response
 		# One-time configuration and initialization(一次性配置和初始化).
@@ -27,7 +27,7 @@ class ShopMiddleware(object):
 		return response
 		
 
-class FeedbackMiddleware(object):
+class VIPPagesMiddleware(object):
 	def __init__(self,get_response):
 		self.get_response = get_response
 
