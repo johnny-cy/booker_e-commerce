@@ -50,8 +50,8 @@ def insert(request):
         # 执行订单信息添加操作
         od = Orders()
         print(request.session)
-        od.uid = request.session['vipuser']['id']
         print(request.session['vipuser'])
+        od.uid = request.session['vipuser']['id']
         od.linkman = request.POST.get('linkman')
         od.address = request.POST.get('address')
         od.code = request.POST.get('code')
