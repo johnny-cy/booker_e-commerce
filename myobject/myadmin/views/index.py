@@ -74,7 +74,7 @@ def verify(request):
 	for i in range(0, 4):
 		rand_str += str1[random.randrange(0, len(str1))]
 	# 构造字体对象，ubuntu的字体路径为“/usr/share/fonts/truetype/freefont”
-	font = ImageFont.truetype('/booker/static/msyhbd.ttf', 21)
+	font = ImageFont.truetype('static/msyhbd.ttf', 21)
 	# font = ImageFont.load_default().font
 	# 构造字体颜色
 	fontcolor = (255, random.randrange(0, 255), random.randrange(0, 255))
@@ -87,7 +87,7 @@ def verify(request):
 	del draw
 	# 存入session，用于做进一步验证
 	request.session['verifycode'] = rand_str
-	print(request.session['verifycode'] )
+	print("verify code is ", request.session['verifycode'] )
 	
 	# 内存文件操作-->此方法为python3的
 	import io
