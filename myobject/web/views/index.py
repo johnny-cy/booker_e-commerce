@@ -222,6 +222,8 @@ def dologin(request):
             im.update(bytes(password, encoding='utf-8'))
             if user.password == im.hexdigest():
                 request.session['vipuser'] = user.toDict()
+                print("user.toDoct() as following:")
+                print(user.toDict())
                 # return render(request, nextpage)
                 return redirect(reverse("index"))
             else:
