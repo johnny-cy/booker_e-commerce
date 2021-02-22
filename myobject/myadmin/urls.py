@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^users/reset_pwd/(?P<uid>[0-9]+)$',users.resetPwd, name = "myadmin_users_reset_pwd"),
 
 	# 后台管理员路由
-    url(r'^login$', index.login, name="myadmin_login"),
+    path('login', index.login, name="myadmin_login"),
     url(r'^dologin$', index.dologin, name="myadmin_dologin"),
     url(r'^logout$', index.logout, name="myadmin_logout"),
     url(r'^verify$', index.verify, name="myadmin_verify"), #验证码
