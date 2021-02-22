@@ -39,6 +39,7 @@ class VIPPagesMiddleware(object):
 		urllist = ['/booker/vip/feedback/', '/booker/vip/orders/']
 		# 获取当前请求路径
 		path = request.path
+		print(path)
 		# 判断当前path是否在urllist中
 		if re.match('^/booker/vip/', path):
 			if 'vipuser' not in request.session:
