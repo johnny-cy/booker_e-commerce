@@ -33,7 +33,7 @@
       <div class="selector hidden-xs hidden-sm">
       <div class="sl-category">
         <div class="sl-line-wrap clearfix">
-          <div class="mod-key">分类：</div>
+          <div class="mod-key">分類：</div>
           <div class="mod-value">
             <div class="mod-value-list">
               <ul>
@@ -82,13 +82,13 @@
       <div class="filter clearfix hidden-xs hidden-sm" style="display:block">
         <div class="filter-order">
           <a class="active" data-tag="0" data-mtype="store_list_sx_1" href="javascript:void(0);">
-              推荐
+              推薦
           </a>
 			<a data-tag="1" data-mtype="store_list_sx_2" href="{% url 'lists' %}?{{q_tid}}{% if 'clicknum' not in q_orderby or not q_orderby %}orderby=clicknum{% else %}{{q_orderby}}{% endif %}">
               點擊率
           </a>
           <a data-tag="2" data-mtype="store_list_sx_3" href="{% url 'lists' %}?{{q_tid}}{% if 'price' not in q_orderby or not q_orderby %}orderby=price{% else %}{{q_orderby}}{% endif %}">
-              价格<i class="icon-arrow-down"></i>
+              價格<i class="icon-arrow-down"></i>
           </a>
         </div>
         <div class="filter-condition" >
@@ -110,7 +110,7 @@
            		<div class="gl-item">
             		<div class="compare-btn-list" >
                   <i class="iconfont  icon-duibi compare-duibi"></i>
-                  <span class="hidden-xs hidden-sm">对比</span>
+                  <span class="hidden-xs hidden-sm">對比</span>
                 </div>
               	<div class="gl-item-wrap">
                 <!-- Tab panes -->
@@ -170,7 +170,7 @@
               {% endif %}
 
               <span class="current">
-                  Page {{ goodslist.number }} of {{ goodslist.paginator.num_pages }}.
+                  頁數 {{ goodslist.number }} / {{ goodslist.paginator.num_pages }}.
               </span>
 
               {% if goodslist.has_next %}
