@@ -35,7 +35,7 @@ class VIPPagesMiddleware(object):
 		self.get_response = get_response
 
 	def __call__(self,request):
-		
+		print('vippagesmiddleware')
 		# 定义网站前台登入時才可以訪問的路由url
 		urllist = ['/booker/vip/feedback/', '/booker/vip/orders/']
 		# 获取当前请求路径
