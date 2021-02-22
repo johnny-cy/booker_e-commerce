@@ -38,7 +38,7 @@ class FeedbackMiddleware(object):
 		# 获取当前请求路径
 		path = request.path
 		# 判断当前path是否在urllist中
-		if re.match('^/vip/', path):
+		if re.match('^/booker/vip/', path):
 			if 'vipuser' not in request.session:
 				print("vipuser not in session..redirect to login")
 				return redirect(reverse('login')) # 順便回傳當前的request.path，登入之後方便直接回來
