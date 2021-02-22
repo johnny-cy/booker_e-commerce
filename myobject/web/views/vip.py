@@ -15,11 +15,9 @@ import html
 MAIL_SERVER_ADDR_ = "smtp.gmail.com"
 MAIL_SERVER_SSL_PORT_ = 465
 MAIL_SERVER_STARTTLS_PORT_ = 587
-# SENDER_ = "smtplibmail01"
-SENDER_ = "svmax0922"
-SENDER_PASSWD_ = "20100905"
-# SENDER_PASSWD_ = "thisissick123"
-RECEIVER_ = ["svmax0922@gmail.com",]
+SENDER_ = "smtplibmail01"
+SENDER_PASSWD_ = "thisissick123"
+RECEIVER_ = ["smtplibmail01@gmail.com",]
 
 # 公共郵件寄送加載
 def send_smtp_ssl(msg):
@@ -126,7 +124,7 @@ def feedback(request):
 	elif request.method == 'POST':
 		print("get in post")
 		myajax_content = html.unescape(request.POST.get('content'))
-
+		
 		message = MIMEMultipart()
 		message['From'] = Header(r"BOOKER網", "utf-8")
 		message['To'] = Header(r"", "utf-8")
