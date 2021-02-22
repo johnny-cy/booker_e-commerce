@@ -62,6 +62,7 @@ def viporders(request):
 			g.picname = Goods.objects.only('picname').get(id=g.goodsid).picname
 			print("this is g.pickname = "+g.picname)
 		# 將新的詳情加入odlist當中，屬性名稱同為detaillist
+
 		od.detaillist = detaillist
 	paginator = Paginator(odlist,5)
 	page = request.GET.get('page')
